@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="--iq-primary: rgb(78, 55, 178); --iq-light-primary: rgba(78, 55, 178,0.1); --iq-primary-hover: rgba(78, 55, 178,0.8);">
    <head>
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Booksto - Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>CSPU - TEST</title>
       <!-- Favicon -->
       <link rel="shortcut icon" href="images/favicon.ico" />
       <!-- Bootstrap CSS -->
@@ -20,8 +20,8 @@
          <!-- Wrapper Start -->
          <div class="wrapper">
             @include('library.sidebar')
-            {{-- @include('library.topbar') --}}
-            {{-- @include('library.content') --}}
+            @include('library.topbar')
+            @include('library.content')
         </div>
         <!-- Wrapper END -->        
 

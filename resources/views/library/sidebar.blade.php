@@ -2,9 +2,9 @@
   <div class="iq-sidebar">
     <div class="iq-sidebar-logo d-flex justify-content-between">
        <a href="index.html" class="header-logo">
-          <img src="{{ asset('assets/images/logo.png')}}" class="img-fluid rounded-normal" alt="">
+          <img src="{{ asset('assets/images/112-book-morph.gif')}}" class="img-fluid rounded-normal" alt="">
           <div class="logo-title">
-             <span class="text-primary text-uppercase">Library</span>
+             <span class="text-primary text-uppercase">CSPU LIBRARY</span>
           </div>
        </a>
        <div class="iq-menu-bt-sidebar">
@@ -19,17 +19,118 @@
        <nav class="iq-sidebar-menu">
           <ul id="iq-sidebar-toggle" class="iq-menu">
              <li class="active active-menu">
-                <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Shop</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Kutubxona</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="dashboard" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                   <li class="active"><a href="index.html"><i class="las la-house-damage"></i>Home Page</a></li>
-                   <li><a href="category.html"><i class="ri-function-line"></i>Category Page</a></li>
-                   <li><a href="book-page.html"><i class="ri-book-line"></i>Book Page</a></li>
-                   <li><a href="book-pdf.html"><i class="ri-file-pdf-line"></i>Book PDF</a></li>
-                   <li><a href="Checkout.html"><i class="ri-checkbox-multiple-blank-line"></i>Checkout</a></li>
-                  <li><a href="wishlist.html"><i class="ri-heart-line"></i>wishlist</a></li>
+                  <li class="active"><a href="#"><i class="las la-house-damage"></i>Kitoblar</a></li>
+                  <li class="elements">
+                     <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-function-line"></i><span>Bo'limlar</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="sub-menu" class="iq-submenu collapse" data-parent="#dashboard">
+                        @foreach ($list_category as $item)
+                           <li><a href="{{$item->slug}}" class="tag-list"><i class="las la-database"></i>{{$item->title}}</a></li>
+                           <hr style="margin-top: 0px; margin-bottom: 0px">
+                        @endforeach                       
+                                             
+                     </ul>
+                  </li>                 
+                  
+                  <li><a href="book-page.html"><i class="ri-book-line"></i>Maqolalar</a></li>
+                  <li><a href="book-pdf.html"><i class="ri-file-pdf-line"></i>Mualiflar</a></li>  
+                  <li class="elements">
+                     <a href="#sub-menu1" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-file-pdf-line"></i><span>Kalit so'zlar</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="sub-menu1" class="iq-submenu collapse" data-parent="#dashboard">                       
+                        <li><a href="#" class="tag-list"><i class="las la-key"></i>Kalit so'zlar</a></li>     
+                        <li><a href="#" class="tag-list"><i class="las la-key"></i>Kalit so'zlar2</a></li>                     
+                     </ul>
+                  </li> 
+                  <li><a href="#"><i class="ri-heart-line"></i>Menga yoqqan</a></li>   
+                  <style>
+                    
+                     .tag-list {
+                        font-size: 14px!important;
+                        padding-top: 7px!important;
+                        padding-bottom: 7px!important;
+                        text-wrap: wrap!important;
+                     }
+                  </style>
                 </ul>
              </li>
-             <li>
+             {{-- <li>
+               <a href="#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+               <ul id="ui-elements" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                  <li class="elements">
+                     <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>UI Kit</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="sub-menu" class="iq-submenu collapse" data-parent="#ui-elements">
+                        <li><a href="ui-colors.html"><i class="las la-palette"></i>colors</a></li>
+                        <li><a href="ui-typography.html"><i class="las la-keyboard"></i>Typography</a></li>
+                        <li><a href="ui-alerts.html"><i class="las la-tag"></i>Alerts</a></li>
+                        <li><a href="ui-badges.html"><i class="lab la-atlassian"></i>Badges</a></li>
+                        <li><a href="ui-breadcrumb.html"><i class="las la-bars"></i>Breadcrumb</a></li>
+                        <li><a href="ui-buttons.html"><i class="las la-tablet"></i>Buttons</a></li>
+                        <li><a href="ui-cards.html"><i class="las la-credit-card"></i>Cards</a></li>
+                        <li><a href="ui-carousel.html"><i class="las la-film"></i>Carousel</a></li>
+                        <li><a href="ui-embed-video.html"><i class="las la-video"></i>Video</a></li>
+                        <li><a href="ui-grid.html"><i class="las la-border-all"></i>Grid</a></li>
+                        <li><a href="ui-images.html"><i class="las la-images"></i>Images</a></li>
+                        <li><a href="ui-list-group.html"><i class="las la-list"></i>list Group</a></li>
+                        <li><a href="ui-media-object.html"><i class="las la-ad"></i>Media</a></li>
+                        <li><a href="ui-modal.html"><i class="las la-columns"></i>Modal</a></li>
+                        <li><a href="ui-notifications.html"><i class="las la-bell"></i>Notifications</a></li>
+                        <li><a href="ui-pagination.html"><i class="las la-ellipsis-h"></i>Pagination</a></li>
+                        <li><a href="ui-popovers.html"><i class="las la-eraser"></i>Popovers</a></li>
+                        <li><a href="ui-progressbars.html"><i class="las la-hdd"></i>Progressbars</a></li>
+                        <li><a href="ui-tabs.html"><i class="las la-database"></i>Tabs</a></li>
+                        <li><a href="ui-tooltips.html"><i class="las la-magnet"></i>Tooltips</a></li>
+                     </ul>
+                  </li>
+                  <li class="form">
+                     <a href="#forms" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-wpforms"></i><span>Forms</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="forms" class="iq-submenu collapse" data-parent="#ui-elements">
+                        <li><a href="form-layout.html"><i class="las la-book"></i>Form Elements</a></li>
+                        <li><a href="form-validation.html"><i class="las la-edit"></i>Form Validation</a></li>
+                        <li><a href="form-switch.html"><i class="las la-toggle-off"></i>Form Switch</a></li>
+                        <li><a href="form-chechbox.html"><i class="las la-check-square"></i>Form Checkbox</a></li>
+                        <li><a href="form-radio.html"><i class="ri-radio-button-line"></i>Form Radio</a></li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a href="#wizard-form" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-archive-drawer-line"></i><span>Forms Wizard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="wizard-form" class="iq-submenu collapse" data-parent="#ui-elements">
+                        <li><a href="form-wizard.html"><i class="ri-clockwise-line"></i>Simple Wizard</a></li>
+                        <li><a href="form-wizard-validate.html"><i class="ri-clockwise-2-line"></i>Validate Wizard</a></li>
+                        <li><a href="form-wizard-vertical.html"><i class="ri-anticlockwise-line"></i>Vertical Wizard</a></li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a href="#tables" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-table-line"></i><span>Table</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="tables" class="iq-submenu collapse" data-parent="#ui-elements">
+                        <li><a href="tables-basic.html"><i class="ri-table-line"></i>Basic Tables</a></li>
+                        <li><a href="data-table.html"><i class="ri-database-line"></i>Data Table</a></li>
+                        <li><a href="table-editable.html"><i class="ri-refund-line"></i>Editable Table</a></li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a href="#charts" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line"></i><span>Charts</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="charts" class="iq-submenu collapse" data-parent="#ui-elements">
+                        <li><a href="chart-morris.html"><i class="ri-file-chart-line"></i>Morris Chart</a></li>
+                        <li><a href="chart-high.html"><i class="ri-bar-chart-line"></i>High Charts</a></li>
+                        <li><a href="chart-am.html"><i class="ri-folder-chart-line"></i>Am Charts</a></li>
+                        <li><a href="chart-apex.html"><i class="ri-folder-chart-2-line"></i>Apex Chart</a></li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a href="#icons" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-list-check"></i><span>Icons</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="icons" class="iq-submenu collapse" data-parent="#ui-elements">
+                        <li><a href="icon-dripicons.html"><i class="ri-stack-line"></i>Dripicons</a></li>
+                        <li><a href="icon-fontawesome-5.html"><i class="ri-facebook-fill"></i>Font Awesome 5</a></li>
+                        <li><a href="icon-lineawesome.html"><i class="ri-keynote-line"></i>line Awesome</a></li>
+                        <li><a href="icon-remixicon.html"><i class="ri-remixicon-line"></i>Remixicon</a></li>
+                        <li><a href="icon-unicons.html"><i class="ri-underline"></i>unicons</a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </li> --}}
+             
+             {{-- <li>
                 <a href="#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="ri-admin-line"></i><span>Admin</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="admin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                    <li><a href="admin-dashboard.html"><i class="ri-dashboard-line"></i>Dashboard</a></li>
@@ -171,14 +272,14 @@
                    <li><a href="#"><i class="ri-record-circle-line"></i>Menu 3</a></li>
                    <li><a href="#"><i class="ri-record-circle-line"></i>Menu 4</a></li>
                 </ul>
-             </li>
+             </li> --}}
           </ul>
        </nav>
        <div id="sidebar-bottom" class="p-3 position-relative">
           <div class="iq-card">
              <div class="iq-card-body">
                 <div class="sidebarbottom-content">
-                   <div class="image"><img src="{{ asset('assets/images/page-img/side-bkg.png')}}" alt=""></div>                           
+                   <div class="image"><img src="{{ asset('assets/images/02.gif')}}" alt=""></div>                           
                    <button type="submit" class="btn w-100 btn-primary mt-4 view-more">Become Membership</button>
                 </div>
              </div>

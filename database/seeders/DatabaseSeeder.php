@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         // Yolg'on ma'lumotlar generatsiyasi uchun
         $this->call(BookCategory::class);
         $this->call(BooksSeeder::class);
-        $this->call(StudentsTableSeeder::class)
+        $this->call(StudentsTableSeeder::class);
+        $this->call(StudentBooksSeeder::class);
         
     }
 }

@@ -43,18 +43,20 @@
        </div>
        <div class="iq-card-body">
           <ul class="list-inline row mb-0 align-items-center iq-scrollable-block">
-            @foreach($kitobxon_talabalar as $item )
+            @foreach($sortedStudents as $item )
             <li class="col-sm-6 d-flex mb-3 align-items-center">
                 <div class="icon iq-icon-box mr-3">
-                   <a href="javascript:void();"><img class="img-fluid avatar-60 rounded-circle" src="{{ asset('assets/images/3432396.png')}}" alt=""></a>
+                   <a href="javascript:void();"><img class="img-fluid avatar-60 rounded-circle" src="{{ $item->img}}" alt=""></a>
                 </div>
                 <div class="mt-1">
                   @php
-                     $words = explode(' ', $item->fish);
-                     $result = implode(' ', array_slice($words, 1));
+                     $fullName = $item->fish;
+                     $words = explode(' ', $fullName);
+                     $requiredWords = array_slice($words, 0, 2);
+                     $remainingWords = implode(' ', array_slice($words, 2));
                   @endphp
-                  <h6>{{ $result }}</h6>
-                  <p class="mb-0 text-primary">O'qigan kitoblar soni: <span class="text-body">2831</span></p>
+                  <h6>{{ implode(' ', $requiredWords) }}</h6>
+                  <p class="mb-0 text-primary">O'qigan kitoblar soni: <span class="text-body">{{ $item->bookCount }}</span></p>
                 </div>
             </li>
             @endforeach

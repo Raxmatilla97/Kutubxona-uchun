@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
+            $table->boolean('status')->default(1); // 1 = Kitobni olgan , 0 = Kitob qaytarilgan
+            $table->date('kitob_olingan_vaqt');
+            $table->date('kitob_qaytarilgan_vaqt')->nullable();
+            $table->text('kitobning_holati')->nullable();
             $table->timestamps();
         });
     }
@@ -27,3 +31,4 @@ return new class extends Migration
         Schema::dropIfExists('book_student');
     }
 };
+

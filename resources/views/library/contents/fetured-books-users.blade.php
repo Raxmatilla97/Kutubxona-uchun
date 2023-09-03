@@ -57,6 +57,7 @@
                   @endphp
                   <h6>{{ implode(' ', $requiredWords) }}</h6>
                   <p class="mb-0 text-primary">O'qigan kitoblar soni: <span class="text-body">{{ $item->bookCount }}</span></p>
+                
                 </div>
             </li>
             @endforeach

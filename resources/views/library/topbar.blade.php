@@ -7,7 +7,7 @@
                 <div class="main-circle"><i class="las la-bars"></i></div>
              </div>
              <div class="iq-navbar-logo d-flex justify-content-between">
-                <a href="index.html" class="header-logo">
+                <a href="{{'/'}}" class="header-logo">
                    <img src="{{ asset('assets/images/112-book-morph.gif')}}" class="img-fluid rounded-normal" alt="">
                    <div class="logo-title">
                       <span class="text-primary text-uppercase">Booksto</span>
@@ -15,14 +15,17 @@
                 </a>
              </div>
           </div>
+          @stack('breadcrumb')          
+          @push('breadcrumb')
           <div class="navbar-breadcrumb">
-             <h5 class="mb-0">Umumiy kutubxona resurslari</h5>
-             <nav aria-label="breadcrumb">
-                <ul class="breadcrumb">
-                     <li class="breadcrumb-item active" aria-current="page">Umumiy resurslar sahifasi</li>
-                </ul>
-             </nav>
-          </div>
+            <h5 class="mb-0">Asosiy sahifa</h5>
+            <nav aria-label="breadcrumb">
+               <ul class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page">Umumiy resurslar sahifasi</li>                     
+               </ul>
+            </nav>
+            </div>          
+          @endpush
           <div class="iq-search-bar">
              <form action="#" class="searchbox">
                 <input type="text" class="text search-input" placeholder="Bu yerdan qidiring...">

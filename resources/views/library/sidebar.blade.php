@@ -1,7 +1,7 @@
   <!-- Sidebar  -->
   <div class="iq-sidebar">
     <div class="iq-sidebar-logo d-flex justify-content-between">
-       <a href="index.html" class="header-logo">
+       <a href="{{'/library'}}" class="header-logo">
           <img src="{{ asset('assets/images/112-book-morph.gif')}}" class="img-fluid rounded-normal" alt="">
           <div class="logo-title">
              <span class="text-primary text-uppercase">CSPU LIBRARY</span>
@@ -21,7 +21,7 @@
              <li class="active active-menu">
                 <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Kutubxona</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="dashboard" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                  <li class="active"><a href="#"><i class="las la-house-damage"></i>Kitoblar</a></li>
+                  <li class="active"><a href="{{ route('dashboard.books-list')}}"><i class="las la-house-damage"></i>Kitoblar</a></li>
                   <li class="elements">
                      <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-function-line"></i><span>Bo'limlar</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="sub-menu" class="iq-submenu collapse" data-parent="#dashboard">

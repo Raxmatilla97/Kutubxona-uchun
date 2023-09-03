@@ -14,8 +14,7 @@ class DashboardController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
-       
+    {          
         // Asosiy sahifadagi slayd joylashgan shu yerdagi kitoblarni chiqaradi
         $books_defined = Book::where('status', 1)
             ->whereNotNull('image')
@@ -32,14 +31,14 @@ class DashboardController extends Controller
             ->orderByDesc('created_at')            
             ->paginate(16);
 
-        // Asosiy sahifadagi slayd joylashgan shu yerdagi kitoblarni chiqaradi
+        // Asosiy sahifadagi bitta reytingi kotta kitob ! Reyting sozlash kerak
         $eng_kop_oqilgan_kitob = Book::where('status', 1)
-        ->whereNotNull('image')
-        ->where('tafsiya_etiladi', 1)
-        ->orderByDesc('created_at')
-        ->limit(1)
-        ->get(); 
-
+            ->whereNotNull('image')
+            ->where('tafsiya_etiladi', 1)
+            ->orderByDesc('created_at')
+            ->limit(1)
+            ->get(); 
+        
         // Asosiy sahifadagi kitobxon talabalar ro'yxatini chiqarish uchun
         $students_kitobxon_count = Student::all();
 
@@ -58,14 +57,35 @@ class DashboardController extends Controller
            
         }        
        
-        $sortedStudents = $students_kitobxon_count->sortByDesc('bookCount')->take(15);
+        $sortedStudents = $students_kitobxon_count->sortByDesc('bookCount')->take(25);
+
+        // Asosiy sahifadagi Ko'p o'qilgan kitoblar ro'yxati
+
+        $kitoblar = Book::all();  
+        
+        foreach ($kitoblar as $kitob) {
+            $totalKorishlar = $kitob->korishlar_soni;
+            $totalOqishlar = $kitob->oqishlar_soni;
+            
+            if ($totalKorishlar != 0) {
+                $oqishFoizi = round(($totalOqishlar / $totalKorishlar) * 100);
+            } else {
+                $oqishFoizi = 0;
+            }
+
+            $kitob->oqish_foizi = $oqishFoizi;
+            $kitoblar = $kitoblar->sortByDesc('oqish_foizi');
+        }       
+
+       
 
         return view('dashboard-index')->with(
             [   'list_category' => $list_category,
                 'books_defined' => $books_defined,
                 'all_books' => $all_books,
                 'eng_kop_oqilgan_kitob' => $eng_kop_oqilgan_kitob,
-                'sortedStudents' => $sortedStudents
+                'sortedStudents' => $sortedStudents,
+                'kitoblar' => $kitoblar,
 
             ]);
     }
@@ -136,5 +156,31 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function booksList()
+    {
+        // Chap tarafdagi menyudagi kitob bo'limlarini chiqaradi
+        $list_category = BookCategory::get();
+
+        // Asosiy sahifadagi kitoblarni ro'yxatini chiqaradi
+        $all_books = Book::where('status', 1)
+            ->orderByDesc('created_at')            
+            ->paginate(16);
+
+        return view('library.books-list')->with(
+            [   'list_category' => $list_category,
+                'all_books' => $all_books,               
+
+            ]);;
+    }
+
+    public function getAuthors(Request $request)
+    {
+        // Ma'lumotlar bazasidan avtor nomlarini olish
+        $authors = Book::orderBy('mualif', 'asc')->pluck('mualif');
+
+        // JSON formatida javobni qaytarish
+        return response()->json(['authors' => $authors]);
     }
 }

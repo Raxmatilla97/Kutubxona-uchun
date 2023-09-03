@@ -9,19 +9,19 @@
              </ul>
           </div>
           <div class="col-lg-6 text-right">
-             Copyright 2020 <a href="index.html#">Booksto</a> All Rights Reserved.
+             Copyright 2023 <a href="#">RAXI-DEV</a> All Rights Reserved.
           </div>
        </div>
     </div>
  </footer>
  <!-- Footer END -->
  <!-- color-customizer -->
- <div class="iq-colorbox color-fix">
-    <div class="buy-button"> <a class="color-full" href="index.html#"><i class="fa fa-spinner fa-spin"></i></a> </div>
+ {{-- <div class="iq-colorbox color-fix">
+    <div class="buy-button"> <a class="color-full" href="#"><i class="fa fa-spinner fa-spin"></i></a> </div>
     <div id="right-sidebar-scrollbar" class="iq-colorbox-inner">
        <div class="clearfix color-picker">
-          <h3 class="iq-font-black">Booksto Awesome Color</h3>
-          <p>This color combo available inside whole template. You can change on your wish, Even you can create your own with limitless possibilities! </p>
+          <h3 class="iq-font-black">O'zingizga yoqqan rangni tanlang</h3>
+          <p>Bu yerda ko'rsatilgan ranglardan tanlashingizm mumkin! </p>
           <ul class="iq-colorselect clearfix">
              <li class="color-1 iq-colormark" data-style="color-1"></li>
              <li class="color-2" data-style="iq-color-2"></li>
@@ -44,8 +44,8 @@
              <li class="color-19" data-style="iq-color-19"></li>
              <li class="color-20" data-style="iq-color-20"></li>
           </ul>
-          <a target="_blank" class="btn btn-primary d-block mt-3" href="index.html">Purchase Now</a>
+          <a target="_blank" class="btn btn-primary d-block mt-3" href="#">Tanlash</a>
        </div>
     </div>
- </div>
+ </div> --}}
  <!-- color-customizer END -->

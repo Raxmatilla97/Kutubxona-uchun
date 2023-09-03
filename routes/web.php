@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/get-authors', [DashboardController::class, 'getAuthors']);
+    Route::get('/library/books', [DashboardController::class, 'booksList'])->name('dashboard.books-list');
     Route::get('/library', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::post('/library/{id}', [DashboardController::class, 'store'])->name('dashboard.library.store');
 

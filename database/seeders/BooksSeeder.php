@@ -18,7 +18,7 @@ class BooksSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 200; $i++) {
             DB::table('books')->insert([
                 'title' => $faker->sentence,
                 'slug' => Str::slug($faker->sentence),
@@ -40,6 +40,8 @@ class BooksSeeder extends Seeder
                 'notes' => $faker->paragraph,
                 'image' => $faker->randomElement(['https://library.cspi.uz/images/site-view-options/comingsoon.jpg', null]),
                 'tafsiya_etiladi' => $faker->randomElement(['1', '0']),
+                'korishlar_soni' => $faker->numberBetween(100, 200),
+                'oqishlar_soni' => $faker->numberBetween(20, 90),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

@@ -33,6 +33,9 @@ return new class extends Migration
             $table->integer('uzgarmas_soni')->nullable()->default('1');
             $table->text('notes')->nullable();
             $table->boolean('tafsiya_etiladi')->default('0');
+            $table->integer('korishlar_soni')->nullable()->default('0');
+            $table->integer('oqishlar_soni')->nullable()->default('0');
+
             $table->timestamps();
         });
     }

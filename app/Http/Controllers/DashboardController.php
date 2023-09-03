@@ -17,8 +17,9 @@ class DashboardController extends Controller
     {          
         // Asosiy sahifadagi slayd joylashgan shu yerdagi kitoblarni chiqaradi
         $books_defined = Book::where('status', 1)
-            ->whereNotNull('image')
+            // ->whereNotNull('image')
             ->where('tafsiya_etiladi', 1)
+            ->where('book_or_article', 'book')
             ->orderByDesc('created_at')
             ->limit(11)
             ->get();            
@@ -28,12 +29,14 @@ class DashboardController extends Controller
 
         // Asosiy sahifadagi kitoblarni ro'yxatini chiqaradi
         $all_books = Book::where('status', 1)
+            ->where('book_or_article', 'book')
             ->orderByDesc('created_at')            
             ->paginate(16);
 
         // Asosiy sahifadagi bitta reytingi kotta kitob ! Reyting sozlash kerak
         $eng_kop_oqilgan_kitob = Book::where('status', 1)
-            ->whereNotNull('image')
+            ->where('book_or_article', 'book')
+            // ->whereNotNull('image')
             ->where('tafsiya_etiladi', 1)
             ->orderByDesc('created_at')
             ->limit(1)
@@ -73,8 +76,18 @@ class DashboardController extends Controller
                 $oqishFoizi = 0;
             }
 
+             // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
+             if ($kitob->image == "") { 
+                if ($kitob->book_or_article == 'book') {
+                    $kitob->image = "/assets/images/book-test.webp";
+                }else{               
+                    $kitob->image = "/assets/images/book-test3.webp";
+                }
+            }
+
             $kitob->oqish_foizi = $oqishFoizi;
-            $kitoblar = $kitoblar->sortByDesc('oqish_foizi');
+            $kitoblar = $kitoblar->sortByDesc('oqish_foizi')->take(6);
+           
         }       
 
        
@@ -164,10 +177,22 @@ class DashboardController extends Controller
         $list_category = BookCategory::get();
 
         // Asosiy sahifadagi kitoblarni ro'yxatini chiqaradi
-        $all_books = Book::where('status', 1)
+        $all_books = Book::where('status', 1)           
             ->orderByDesc('created_at')            
-            ->paginate(16);
+            ->paginate(28);
 
+        foreach ($all_books as $book) {    
+            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
+            if ($book->image == "") { 
+                if ($book->book_or_article == 'book') {
+                    $book->image = "/assets/images/book-test.webp";
+                }else{               
+                    $book->image = "/assets/images/book-test3.webp";
+                }
+            }
+            
+        }        
+     
         return view('library.books-list')->with(
             [   'list_category' => $list_category,
                 'all_books' => $all_books,               
@@ -183,4 +208,6 @@ class DashboardController extends Controller
         // JSON formatida javobni qaytarish
         return response()->json(['authors' => $authors]);
     }
+
+    
 }

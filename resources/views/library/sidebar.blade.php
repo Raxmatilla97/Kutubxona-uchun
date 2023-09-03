@@ -21,7 +21,7 @@
              <li class="active active-menu">
                 <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Kutubxona</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="dashboard" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                  <li class="active"><a href="{{ route('dashboard.books-list')}}"><i class="las la-house-damage"></i>Kitoblar</a></li>
+                  <li class="active"><a href="{{ route('dashboard.resurs-list')}}"><i class="las la-house-damage"></i>Barcha resurslar</a></li>
                   <li class="elements">
                      <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-function-line"></i><span>Bo'limlar</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="sub-menu" class="iq-submenu collapse" data-parent="#dashboard">
@@ -32,7 +32,7 @@
                                              
                      </ul>
                   </li>                 
-                  
+                  <li><a href="book-page.html"><i class="ri-book-line"></i>Kitoblar</a></li>
                   <li><a href="book-page.html"><i class="ri-book-line"></i>Maqolalar</a></li>
                   <li><a href="book-pdf.html"><i class="ri-file-pdf-line"></i>Mualiflar</a></li>  
                   <li class="elements">

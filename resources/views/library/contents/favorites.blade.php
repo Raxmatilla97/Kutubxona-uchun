@@ -2,7 +2,7 @@
     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
        <div class="iq-card-header d-flex justify-content-between align-items-center position-relative">
           <div class="iq-header-title">
-             <h4 class="card-title mb-0">Ko'p o'qilgan kitoblar</h4>
+             <h4 class="card-title mb-0">Ko'p o'qilgan resurslar</h4>
           </div>
           <div class="iq-card-header-toolbar d-flex align-items-center">
              <a href="category.html" class="btn btn-sm btn-primary view-more">Barchasini ko'rish</a>
@@ -15,7 +15,7 @@
                <div class="d-flex align-items-center">
                   <div class="col-5 p-0 position-relative">
                      <a href="javascript:void();">
-                        <img src="{{ asset('assets/images/book-test3.webp')}}" class="img-fluid rounded w-100" alt="">
+                        <img src="{{ $item->image }}" class="img-fluid rounded w-100" alt="">
                      </a>                                
                   </div>
                   <div class="col-7">

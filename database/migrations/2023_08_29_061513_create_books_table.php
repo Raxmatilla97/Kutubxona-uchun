@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
             $table->string('book_inventar_number')->nullable();
+            $table->string('book_or_article')->nullable();
             $table->string('nashriyot_nomi')->nullable();
             $table->string('chiqarilgan_yili')->nullable();
             $table->string('mualif')->nullable();

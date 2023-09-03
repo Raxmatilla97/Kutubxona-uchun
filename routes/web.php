@@ -22,7 +22,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/get-authors', [DashboardController::class, 'getAuthors']);
-    Route::get('/library/books', [DashboardController::class, 'booksList'])->name('dashboard.books-list');
+    Route::get('/library/resurs', [DashboardController::class, 'booksList'])->name('dashboard.resurs-list');
+    // Search qismlari
+    Route::post('/library/resurs-search', [DashboardController::class, 'booksSearch'])->name('dashboard.resurs-search');
     Route::get('/library', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::post('/library/{id}', [DashboardController::class, 'store'])->name('dashboard.library.store');
 

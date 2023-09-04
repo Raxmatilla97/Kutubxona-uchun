@@ -26,14 +26,14 @@
                      <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-function-line"></i><span>Bo'limlar</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="sub-menu" class="iq-submenu collapse" data-parent="#dashboard">
                         @foreach ($list_category as $item)
-                           <li><a href="{{$item->slug}}" class="tag-list"><i class="las la-database"></i>{{$item->title}}</a></li>
+                           <li><a href="{{ route('dashboard.library-books-category', $item->slug)}}" class="tag-list"><i class="las la-database"></i>{{$item->title}}</a></li>
                            <hr style="margin-top: 0px; margin-bottom: 0px">
                         @endforeach                       
                                              
                      </ul>
                   </li>                 
-                  <li><a href="book-page.html"><i class="ri-book-line"></i>Kitoblar</a></li>
-                  <li><a href="book-page.html"><i class="ri-book-line"></i>Maqolalar</a></li>
+                  <li><a href="{{ route('dashboard.library-books') }}"><i class="ri-book-line"></i>Kitoblar</a></li>
+                  <li><a href="{{ route('dashboard.library-articles')}}"><i class="ri-book-line"></i>Maqolalar</a></li>
                   <li><a href="book-pdf.html"><i class="ri-file-pdf-line"></i>Mualiflar</a></li>  
                   <li class="elements">
                      <a href="#sub-menu1" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-file-pdf-line"></i><span>Kalit so'zlar</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>

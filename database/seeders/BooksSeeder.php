@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\Book;
+use App\Models\BookCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -31,8 +32,7 @@ class BooksSeeder extends Seeder
                 'sahifa_soni_va_olcham' => $faker->randomNumber(2) . ' x ' . $faker->randomNumber(2),
                 'nechanchi_nashr' => $faker->randomNumber(2),
                 'yozilgan_tili' => $faker->word,
-                'kitobga_javobgar' => $faker->name,
-                'mavzusi' => $faker->sentence,
+                'kitobga_javobgar' => $faker->name,              
                 'gmd_name' => $faker->randomElement(['Kitob', 'Elektron kitob']),
                 'classificatsiya' => $faker->word,
                 'status' => $faker->boolean,
@@ -43,6 +43,7 @@ class BooksSeeder extends Seeder
                 'tafsiya_etiladi' => $faker->randomElement(['1', '0']),
                 'korishlar_soni' => $faker->numberBetween(100, 200),
                 'oqishlar_soni' => $faker->numberBetween(20, 90),
+                'book_category_id' => $faker->numberBetween(1, 8),               
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

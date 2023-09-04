@@ -16,9 +16,9 @@
                     <div class="iq-card-body p-0">
                         <div class="d-flex align-items-center">
                             <div class="col-6 p-0 position-relative image-overlap-shadow">
-                                <a href="javascript:void();"><img class="img-fluid rounded w-100" src="{{ asset('assets/images/book-test.webp')}}" alt=""></a>
+                                <a href="{{ route('dashboard.library-book-detal', $item->slug )}}"><img class="img-fluid rounded w-100" src="{{ asset('assets/images/book-test.webp')}}" alt=""></a>
                                 <div class="view-book">
-                                <a href="book-page.html" class="btn btn-sm btn-white">Kitobni ko'rish</a>
+                                <a href="{{ route('dashboard.library-book-detal', $item->slug )}}" class="btn btn-sm btn-white">Kitobni ko'rish</a>
                                 </div>
                             </div>
                             <div class="col-6" >
@@ -49,7 +49,7 @@
                                 </h6>
                                 </div>
                                 <div style="font-size: 14px">
-                                    <img id="animated-gif" style="width: 25px;" src="{{ asset('assets/images/eye.png')}}">
+                                    <img id="animated-gif" style="width: 25px; display: inline-block;" src="{{ asset('assets/images/eye.png')}}">
                                     {{$item->korishlar_soni}} - ko'rilgan
                                 
                                 </div>

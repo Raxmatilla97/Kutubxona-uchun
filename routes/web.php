@@ -21,12 +21,18 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
+     // Search qismlari
+    Route::match(['get', 'post'],'/library/resurs-search', [DashboardController::class, 'booksSearch'])->name('dashboard.resurs-search');
     Route::get('/get-authors', [DashboardController::class, 'getAuthors']);
-    Route::get('/library/resurs', [DashboardController::class, 'booksList'])->name('dashboard.resurs-list');
-    // Search qismlari
-    Route::post('/library/resurs-search', [DashboardController::class, 'booksSearch'])->name('dashboard.resurs-search');
+    Route::get('/library/resurs', [DashboardController::class, 'booksList'])->name('dashboard.resurs-list');    
     Route::get('/library', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::post('/library/{id}', [DashboardController::class, 'store'])->name('dashboard.library.store');
+    Route::get('/library/books', [DashboardController::class, 'libraryBooks'])->name('dashboard.library-books');
+    Route::get('/library/articles', [DashboardController::class, 'libraryArticles'])->name('dashboard.library-articles');
+    Route::get('/library/books/{category}', [DashboardController::class, 'libraryBooksCategory'])->name('dashboard.library-books-category');
+    Route::get('/library/book/{slug}', [DashboardController::class, 'libraryBookDetal'])->name('dashboard.library-book-detal');
+
+    // Route::post('/library/{id}', [DashboardController::class, 'store'])->name('dashboard.library.store');
+   
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

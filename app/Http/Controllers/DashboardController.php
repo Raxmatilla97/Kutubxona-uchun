@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+  
     /**
      * Display a listing of the resource.
      */
@@ -103,13 +104,7 @@ class DashboardController extends Controller
             ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -117,7 +112,7 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         $request['rate'] = 4;
-        dd($request);
+       
         request()->validate(['rate' => 'required']);
 
         $post = Post::find($request->id);
@@ -139,42 +134,12 @@ class DashboardController extends Controller
         return redirect()->route("posts");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
+    
     public function booksList()
     {
         // Chap tarafdagi menyudagi kitob bo'limlarini chiqaradi
         $list_category = BookCategory::get();
+
 
         // Asosiy sahifadagi kitoblarni ro'yxatini chiqaradi
         $all_books = Book::where('status', 1)           
@@ -193,11 +158,7 @@ class DashboardController extends Controller
             
         }        
      
-        return view('library.books-list')->with(
-            [   'list_category' => $list_category,
-                'all_books' => $all_books,               
-
-            ]);;
+        return view('library.books-list', compact('list_category', 'all_books'));
     }
 
     public function getAuthors(Request $request)
@@ -209,5 +170,130 @@ class DashboardController extends Controller
         return response()->json(['authors' => $authors]);
     }
 
+    public function booksSearch(Request $request)
+    {    
+       
+        $book_or_article = $request->input('book_or_article');
+        $category = $request->input('category');
+        $year = $request->input('year');
+        $author = $request->input('author');
+        $text = $request->input('text');
+
+        $query = Book::query();
+
+        
+        if ($book_or_article) {
+            $query->where('book_or_article', $book_or_article);
+        }
+        if ($year) {
+            $query->where('chiqarilgan_yili', $year);
+        }
+    
+        if ($author) {
+            $query->where('mualif', 'like', '%' . $author . '%');          
+        }
+
+        if ($text) {
+            $query->where('title', 'like', '%' . $text . '%');          
+        }
+
+        $all_books = $query->paginate(28);
+      
+        foreach ($all_books as $book) {    
+            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
+            if ($book->image == "") { 
+                if ($book->book_or_article == 'book') {
+                    $book->image = "/assets/images/book-test.webp";
+                }else{               
+                    $book->image = "/assets/images/book-test3.webp";
+                }
+            }
+            
+        }        
+     
+        $list_category = BookCategory::get();
+
+        return view('library.books-list', compact('list_category', 'all_books'));
+    }
+
+    public function libraryBooks()
+    {
+        $list_category = BookCategory::get();
+        $all_books = Book::where('book_or_article', 'book')->paginate(28);
+        
+        foreach ($all_books as $book) {    
+            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
+            if ($book->image == "") { 
+                if ($book->book_or_article == 'book') {
+                    $book->image = "/assets/images/book-test.webp";
+                }else{               
+                    $book->image = "/assets/images/book-test3.webp";
+                }
+            }
+            
+        }       
+
+        return view('library.books-list', compact('list_category', 'all_books'));
+    }
+
+    public function libraryArticles()
+    {
+        $list_category = BookCategory::get();
+        $all_books = Book::where('book_or_article', 'article')->paginate(28);
+        
+        foreach ($all_books as $book) {    
+            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
+            if ($book->image == "") { 
+                if ($book->book_or_article == 'book') {
+                    $book->image = "/assets/images/book-test.webp";
+                }else{               
+                    $book->image = "/assets/images/book-test3.webp";
+                }
+            }
+            
+        }       
+
+        return view('library.books-list', compact('list_category', 'all_books'));
+    }
+
+    public function libraryBooksCategory($slug)
+    {     
+        $list_category = BookCategory::get();
+
+        $all_books = Book::where('status', 1)->whereHas('BookCategory', function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })->paginate(28);
+
+        foreach ($all_books as $book) {    
+            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
+            if ($book->image == "") { 
+                if ($book->book_or_article == 'book') {
+                    $book->image = "/assets/images/book-test.webp";
+                }else{               
+                    $book->image = "/assets/images/book-test3.webp";
+                }
+            }
+            
+        }
+
+        return view('library.books-list', compact('list_category', 'all_books'));
+    }
+
+    public function libraryBookDetal($slug)
+    {
+        $list_category = BookCategory::get();
+        $book = Book::where('slug', $slug)->first();
+    
+        // Kitobning surati bo'lmasa, uchun default surat birlashtiramiz.
+        if ($book && $book->image == "") { 
+            if ($book->book_or_article == 'book') {
+                $book->image = "/assets/images/book-test.webp";
+            } else {               
+                $book->image = "/assets/images/book-test3.webp";
+            }
+        }
+     
+        return view('library.book-detal', compact('list_category', 'book'));
+    }
     
 }

@@ -16,7 +16,20 @@
         <div class="container-fluid">
            <div class="row">
                 <div class="col-lg-12">                    
-                    <form action="#" >
+                    <form action="{{ route('dashboard.resurs-search') }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <style>
+                            .form-control {
+                                height: 45px;
+                                line-height: 35px;
+                                background: transparent;
+                                border: 1px solid var(--iq-border-light);
+                                font-size: 14px;
+                                color: var(--iq-secondary);
+                                border-radius: 5px;
+                            }
+                        </style>
                         <div class="iq-card-transparent mb-0">
                             <div class="d-block text-center">
                                 <h2 class="mb-3">Kitob va maqolalar qidirish</h2>    
@@ -25,10 +38,10 @@
                                         <li class="search-menu-opt">
                                             <div class="iq-dropdown">
                                             <div class="form-group mb-0">
-                                                <select class="form-control form-search-control bg-white border-0" id="exampleFormControlSelect1">
-                                                    <option selected="">Barchasi</option>
-                                                    <option>Kitoblar</option>
-                                                    <option>Maqolalar</option>                                                   
+                                                <select name="book_or_article" class="form-control form-search-control bg-white border-0" id="exampleFormControlSelect1">
+                                                    <option value="" {{ request('book_or_article') === null ? 'selected' : '' }}>Barchasi</option>
+                                                    <option value="book" {{ request('book_or_article') == 'book' ? 'selected' : '' }}>Kitoblar</option>
+                                                    <option value="article" {{ request('book_or_article') == 'article' ? 'selected' : '' }}>Maqolalar</option>
                                                 </select>
                                             </div>
                                             </div>
@@ -36,11 +49,11 @@
                                         <li class="search-menu-opt">
                                             <div class="iq-dropdown">
                                             <div class="form-group mb-0">
-                                                <select class="form-control form-search-control bg-white border-0" id="exampleFormControlSelect2">
-                                                    <option selected="">Bo'limni tanlang</option>
+                                                <select name="category" class="form-control form-search-control bg-white border-0" id="exampleFormControlSelect2">
+                                                    <option value="" {{ request('category') === null ? 'selected' : '' }}>Bo'limni tanlang</option>
                                                     @foreach ($list_category as $item)
-                                                    <option value="{{ $item->slug }}">{{ $item->title }}</option>   
-                                                    @endforeach                                                                             
+                                                        <option value="{{ $item->slug }}" {{ request('category') == $item->slug ? 'selected' : '' }}>{{ $item->title }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             </div>
@@ -54,9 +67,10 @@
                                                     $endYear = $currentYear;
                                                 @endphp
                                             
-                                            <select class="form-control form-search-control bg-white border-0" id="exampleFormControlSelect3">                                  
+                                            <select name="year" class="form-control form-search-control bg-white border-0" id="exampleFormControlSelect3">
+                                                <option value="" {{ request('year') === null ? 'selected' : '' }}>Yilni tanlang</option>
                                                 @for ($year = $endYear; $year >= $startYear; $year--)
-                                                    <option {{ $currentYear == $year ? 'selected' : '' }}>{{ $year }}</option>
+                                                    <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>{{ $year }}</option>
                                                 @endfor
                                             </select>
                                             </div>
@@ -65,8 +79,8 @@
                                         <li class="search-menu-opt">
                                             <div class="iq-dropdown">
                                             <div class="form-group mb-0">
-                                                <select class="form-control form-search-control bg-white border-0" id="exampleFormControlSelect4">
-                                                    <option selected="">Mualliflar A-Z</option>                                        
+                                                <select name="author" class="form-control form-search-control bg-white border-0" id="exampleFormControlSelect4">
+                                                    <option value="" {{ request('author') === null ? 'selected' : '' }}>Mualliflar A-Z</option>
                                                 </select>
                                             </div>
                                             </div>
@@ -74,7 +88,7 @@
                                         <li class="search-menu-opt">
                                             <div class="iq-search-bar search-book d-flex align-items-center ">
                                                 <div class="searchbox">
-                                                    <input type="text" class="text search-input" placeholder="Bu yerdan qidiring...">
+                                                    <input name="text" value="{{ request('text') ? request('text') : '' }}" type="text" class="text search-input" placeholder="Bu yerdan qidiring...">
                                                     <a class="search-link" href="#"><i class="ri-search-line"></i></a>       
                                                 </div>                  
                                             <button type="submit" class="btn btn-primary search-data ml-2">Qidirish</button>
@@ -100,9 +114,9 @@
                                     <div class="iq-card-body p-0">
                                         <div class="d-flex align-items-center">
                                             <div class="col-6 p-0 position-relative image-overlap-shadow">
-                                                <a href="javascript:void();"><img class="img-fluid rounded w-100" src="{{ $item->image }}" alt=""></a>
+                                                <a href="{{ route('dashboard.library-book-detal', $item->slug )}}"><img class="img-fluid rounded w-100" src="{{ $item->image }}" alt=""></a>
                                                 <div class="view-book">
-                                                <a href="book-page.html" class="btn btn-sm btn-white">
+                                                <a href="{{ route('dashboard.library-book-detal', $item->slug )}}" class="btn btn-sm btn-white">
                                                     @if ($item->book_or_article == 'book')
                                                         Kitobni ko'rish
                                                     @else
@@ -139,7 +153,7 @@
                                                 </h6>
                                                 </div>
                                                 <div style="font-size: 14px">
-                                                    <img id="animated-gif" style="width: 25px;" src="{{ asset('assets/images/eye.png')}}">
+                                                    <img id="animated-gif" style="width: 25px; display: inline-block;" src="{{ asset('assets/images/eye.png')}}">
                                                     {{$item->korishlar_soni}} - ko'rilgan
                                                 
                                                 </div>
@@ -153,7 +167,8 @@
                        </div>
                        <hr>
                        <div class="mt-6 mb-6">
-                            {!! $all_books->links() !!}
+                            {{-- {!! $all_books->links() !!} --}}
+                            {!! $all_books->appends(Request::except('page'))->render() !!}
                        </div>                       
                     </div>                    
                  </div>                
@@ -166,28 +181,39 @@
 
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <script>
-         $(document).ready(function() {
-             var selectElement = $('#exampleFormControlSelect4');
-
-             // AJAX so'rovini yuborish
-             $.ajax({
-                 url: '/get-authors', // Ma'lumotlar bazasiga murojaat qiladigan URL
-                 type: 'GET',
-                 dataType: 'json',
-                 success: function(response) {
-                     // Ma'lumotlar bazasidan qaytgan javobni qabul qilish
-                     var authors = response.authors;
-
-                     // Select elementiga avtor nomlarini qo'shish
-                     $.each(authors, function(index, author) {
-                         selectElement.append('<option>' + author + '</option>');
-                     });
-                 },
-                 error: function(xhr, status, error) {
-                     // Xatolik holatida xabar chiqarish
-                     console.log(error);
-                 }
-             });
-         });
-     </script>
+        $(document).ready(function() {
+            var selectElement = $('#exampleFormControlSelect4');
+            
+            // Sahifa yangilanishidan oldin tanlangan muallif nomini olish
+            var selectedAuthor = "{{ request('author') }}";
+    
+            // AJAX so'rovini yuborish
+            $.ajax({
+                url: '/get-authors', // Ma'lumotlar bazasiga murojaat qiladigan URL
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    // Ma'lumotlar bazasidan qaytgan javobni qabul qilish
+                    var authors = response.authors;
+    
+                    // Select elementini tozalash
+                    selectElement.empty();
+    
+                    // Tanlov elementiga avtor nomlarini qo'shish
+                    selectElement.append('<option value="">Mualliflar A-Z</option>');
+                    $.each(authors, function(index, author) {
+                        var option = $('<option></option>').attr('value', author).text(author);
+                        if (author === selectedAuthor) {
+                            option.attr('selected', 'selected');
+                        }
+                        selectElement.append(option);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Xatolik holatida xabar chiqarish
+                    console.log(error);
+                }
+            });
+        });
+    </script>
 @endsection

@@ -26,9 +26,11 @@
             </nav>
             </div>          
           @endpush
-          <div class="iq-search-bar">
-             <form action="#" class="searchbox">
-                <input type="text" class="text search-input" placeholder="Bu yerdan qidiring...">
+          <div class="iq-search-bar">             
+               <form action="{{ route('dashboard.resurs-search') }}" method="POST"  class="searchbox">
+                  @csrf
+                  @method('POST')
+               <input type="text" name="text" value="{{ request('text') ? request('text') : '' }}" class="text search-input" placeholder="Bu yerdan qidiring...">
                 <a class="search-link" href="$"><i class="ri-search-line"></i></a>
              </form>
           </div>
@@ -40,9 +42,11 @@
                 <li class="nav-item nav-icon search-content">
                    <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
                       <i class="ri-search-line"></i>
-                   </a>
-                   <form action="#" class="search-box p-0">
-                      <input type="text" class="text search-input" placeholder="Qidirish uchun bu yerga yozing...">
+                   </a>                   
+                     <form action="{{ route('dashboard.resurs-search') }}" method="POST" class="search-box p-0">
+                        @csrf
+                        @method('POST')
+                      <input type="text" name="text" value="{{ request('text') ? request('text') : '' }}" class="text search-input" placeholder="Qidirish uchun bu yerga yozing...">
                       <a class="search-link" href="#"><i class="ri-search-line"></i></a>
                    </form>
                 </li>

@@ -25,8 +25,7 @@ return new class extends Migration
             $table->string('sahifa_soni_va_olcham')->nullable();
             $table->string('nechanchi_nashr')->nullable();
             $table->string('yozilgan_tili')->nullable();
-            $table->string('kitobga_javobgar')->nullable();
-            $table->string('mavzusi')->nullable();
+            $table->string('kitobga_javobgar')->nullable();            
             $table->string('gmd_name')->nullable();
             $table->string('classificatsiya')->nullable();
             $table->boolean('status')->default(0);
@@ -36,6 +35,8 @@ return new class extends Migration
             $table->boolean('tafsiya_etiladi')->default('0');
             $table->integer('korishlar_soni')->nullable()->default('0');
             $table->integer('oqishlar_soni')->nullable()->default('0');
+            $table->foreignId('book_category_id')->constrained('book_categories')->onDelete('cascade');
+
 
             $table->timestamps();
         });

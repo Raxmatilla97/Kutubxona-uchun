@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Student;
-use App\Models\Book;
+use App\Models\BookCopy;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
@@ -19,7 +19,7 @@ class StudentBooksSeeder extends Seeder
     public function run(): void
     {
         $students = Student::pluck('id')->all();
-        $books = Book::pluck('id')->all();
+        $books = BookCopy::pluck('id')->all();
 
         foreach ($students as $studentId) {
             $numBooks = rand(1, 20);
@@ -32,7 +32,7 @@ class StudentBooksSeeder extends Seeder
             foreach ($randomBookIds as $randomBookId) {
                 DB::table('book_student')->insert([
                     'student_id' => $studentId,
-                    'book_id' => $books[$randomBookId],
+                    'book_copy_id' => $books[$randomBookId],
                     'status' => 1,
                     'kitob_olingan_vaqt' => now(),
                     'kitob_qaytarilgan_vaqt' => null,

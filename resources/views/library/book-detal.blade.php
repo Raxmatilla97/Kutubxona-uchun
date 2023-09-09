@@ -95,9 +95,16 @@
                                          </ul>
                                       </div>
                                    </div>
-                                </div>
+                                </div> 
+                                 <div class="mt-4">
+                                    <span class="text-dark mb-4 pb-4 iq-border-bottom d-block">{{ $book->notes }}</span>                           
+                                 </div> 
+                                  
                              </div>
                           </div>
+
+                          
+                          
                           <div class="col-md-6">
                              <div class="iq-card-transparent iq-card-block iq-card-stretch iq-card-height">
                                 <div class="iq-card-body p-0">
@@ -170,34 +177,32 @@
                                         <td>TVCHDPI ARM fondi</td>
                                       </tr>
                                     </tbody>
-                                  </table>
-                                   
-                                   <span class="text-dark mb-4 pb-4 iq-border-bottom d-block">{{ $book->notes }}</span>
-                                   <div class="text-primary mb-4">Muallif(lar): <span class="text-body">{{ $book->mualif }}</span></div>
+                                  </table>     
+
                                    <div class="mb-4 d-flex align-items-center">                                       
                                       <a href="#" class="btn btn-primary view-more mr-2">Kitob</a>
                                       <a href="#" class="btn btn-primary view-more mr-2">Ertak</a>
                                    </div>
                                    <div class="mb-3">
-                                      <a href="book-page.html#" class="text-body text-center"><span class="avatar-30 rounded-circle bg-primary d-inline-block mr-2"><i class="ri-heart-fill"></i></span><span>Add to Wishlist</span></a>
+                                      <a href="book-page.html#" class="text-body text-center"><span class="avatar-30 rounded-circle bg-primary d-inline-block mr-2"><i class="ri-heart-fill"></i></span><span>Sevimli resurslar ro'yxatiga qo'shish</span></a>
                                    </div>
                                    <div class="iq-social d-flex align-items-center">
-                                      <h5 class="mr-2">Share:</h5>
-                                      <ul class="list-inline d-flex p-0 mb-0 align-items-center">
-                                         <li>
-                                            <a href="book-page.html#" class="avatar-40 rounded-circle bg-primary mr-2 facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                         </li>
-                                         <li>
-                                            <a href="book-page.html#" class="avatar-40 rounded-circle bg-primary mr-2 twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                         </li>
-                                         <li>
-                                            <a href="book-page.html#" class="avatar-40 rounded-circle bg-primary mr-2 youtube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                                         </li>
-                                         <li >
-                                            <a href="book-page.html#" class="avatar-40 rounded-circle bg-primary pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
-                                         </li>
-                                      </ul>
-                                   </div>
+                                    <h5 class="mr-2">Share:</h5>
+                                    <ul class="list-inline d-flex p-0 mb-0 align-items-center">
+                                       <li>
+                                          <a href="#" class="avatar-40 rounded-circle bg-primary mr-2 facebook"><i class="fa fa-facebook" aria-hidden="true" style="margin-top: 30%;"></i></a>
+                                       </li>
+                                       <li>
+                                          <a href="#" class="avatar-40 rounded-circle bg-primary mr-2 twitter"><i class="fa fa-twitter" aria-hidden="true" style="margin-top: 30%;"></i></a>
+                                       </li>
+                                       <li>
+                                          <a href="#" class="avatar-40 rounded-circle bg-primary mr-2 youtube"><i class="fa fa-youtube-play" aria-hidden="true" style="margin-top: 30%;"></i></a>
+                                       </li>
+                                       <li>
+                                          <a href="#" class="avatar-40 rounded-circle bg-primary pinterest"><i class="fa fa-pinterest-p" aria-hidden="true" style="margin-top: 30%;"></i></a>
+                                       </li>
+                                    </ul>
+                                 </div>
                                 </div>
                              </div>
                           </div>
@@ -205,6 +210,10 @@
                     </div>
                  </div>
               </div>
+
+              {{-- Kitobni copyalari haqida ro'yxat --}}
+              @include('library.book_copyes_in_book')
+
               <div class="col-lg-12">
                  <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                     <div class="iq-card-header d-flex justify-content-between align-items-center position-relative">
@@ -427,7 +436,7 @@
                                 </div>
                                 <div class="col-7">
                                    <div class="mb-2">
-                                      <h6 class="mb-1">Take The Risk Book</h6>
+                                      <h6 class="mb-1">TakFavorite Readse The Risk Book</h6>
                                       <p class="font-size-13 line-height mb-1">Smith goal</p>
                                       <div class="d-block">
                                          <span class="font-size-13 text-warning">
@@ -520,114 +529,7 @@
                     </div>
                  </div>
               </div>
-              <div class="col-lg-12">
-                 <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                    <div class="iq-card-header d-flex justify-content-between align-items-center position-relative">
-                       <div class="iq-header-title">
-                          <h4 class="card-title mb-0">Favorite Reads</h4>
-                       </div>
-                       <div class="iq-card-header-toolbar d-flex align-items-center">
-                          <a href="category.html" class="btn btn-sm btn-primary view-more">View More</a>
-                       </div>
-                    </div>                         
-                    <div class="iq-card-body favorites-contens">
-                       <ul id="favorites-slider" class="list-inline p-0 mb-0 row">
-                          <li class="col-md-4">
-                             <div class="d-flex align-items-center">
-                                <div class="col-5 p-0 position-relative">
-                                   <a href="javascript:void();">
-                                      <img src="images/favorite/01.jpg" class="img-fluid rounded w-100" alt="">
-                                   </a>                                
-                                </div>
-                                <div class="col-7">
-                                   <h5 class="mb-2">Every Book is a new Wonderful Travel..</h5>
-                                   <p class="mb-2">Author : Pedro Araez</p>                                          
-                                   <div class="d-flex justify-content-between align-items-center text-dark font-size-13">
-                                      <span>Reading</span>
-                                      <span class="mr-4">78%</span>
-                                   </div>
-                                   <div class="iq-progress-bar-linear d-inline-block w-100">
-                                      <div class="iq-progress-bar iq-bg-primary">
-                                         <span class="bg-primary" data-percent="78"></span>
-                                      </div>
-                                   </div>
-                                   <a href="book-page.html#" class="text-dark">Read Now<i class="ri-arrow-right-s-line"></i></a>
-                                </div>
-                             </div>
-                          </li>
-                          <li class="col-md-4">
-                             <div class="d-flex align-items-center">
-                                <div class="col-5 p-0 position-relative">
-                                   <a href="javascript:void();">
-                                      <img src="images/favorite/02.jpg" class="img-fluid rounded w-100" alt="">
-                                   </a>                                
-                                </div>
-                                <div class="col-7">
-                                   <h5 class="mb-2">Casey Christie night book into find...</h5>
-                                   <p class="mb-2">Author : Michael klock</p>                                          
-                                   <div class="d-flex justify-content-between align-items-center text-dark font-size-13">
-                                      <span>Reading</span>
-                                      <span class="mr-4">78%</span>
-                                   </div>
-                                   <div class="iq-progress-bar-linear d-inline-block w-100">
-                                      <div class="iq-progress-bar iq-bg-danger">
-                                         <span class="bg-danger" data-percent="78"></span>
-                                      </div>
-                                   </div>
-                                   <a href="book-page.html#" class="text-dark">Read Now<i class="ri-arrow-right-s-line"></i></a>
-                                </div>
-                             </div>
-                          </li>
-                          <li class="col-md-4">
-                             <div class="d-flex align-items-center">
-                                <div class="col-5 p-0 position-relative">
-                                   <a href="javascript:void();">
-                                      <img src="images/favorite/03.jpg" class="img-fluid rounded w-100" alt="">
-                                   </a>                                
-                                </div>
-                                <div class="col-7">
-                                   <h5 class="mb-2">The Secret to English Busy People..</h5>
-                                   <p class="mb-2">Author : Daniel Ace</p>                                          
-                                   <div class="d-flex justify-content-between align-items-center text-dark font-size-13">
-                                      <span>Reading</span>
-                                      <span class="mr-4">78%</span>
-                                   </div>
-                                   <div class="iq-progress-bar-linear d-inline-block w-100">
-                                      <div class="iq-progress-bar iq-bg-info">
-                                         <span class="bg-info" data-percent="78"></span>
-                                      </div>
-                                   </div>
-                                   <a href="book-page.html#" class="text-dark">Read Now<i class="ri-arrow-right-s-line"></i></a>
-                                </div>
-                             </div>
-                          </li>
-                          <li class="col-md-4">
-                             <div class="d-flex align-items-center">
-                                <div class="col-5 p-0 position-relative">
-                                   <a href="javascript:void();">
-                                      <img src="images/favorite/04.jpg" class="img-fluid rounded w-100" alt="">
-                                   </a>                                
-                                </div>
-                                <div class="col-7">
-                                   <h5 class="mb-2">The adventures of Robins books...</h5>
-                                   <p class="mb-2">Author : Luka Afton</p>                                          
-                                   <div class="d-flex justify-content-between align-items-center text-dark font-size-13">
-                                      <span>Reading</span>
-                                      <span class="mr-4">78%</span>
-                                   </div>
-                                   <div class="iq-progress-bar-linear d-inline-block w-100">
-                                      <div class="iq-progress-bar iq-bg-success">
-                                         <span class="bg-success" data-percent="78"></span>
-                                      </div>
-                                   </div>
-                                   <a href="book-page.html#" class="text-dark">Read Now<i class="ri-arrow-right-s-line"></i></a>
-                                </div>
-                             </div>
-                          </li>
-                       </ul>
-                    </div>
-                 </div>
-              </div>
+              
            </div>
         </div>
      </div>

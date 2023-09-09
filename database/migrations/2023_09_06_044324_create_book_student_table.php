@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('book_student', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
+            $table->foreignId('book_copy_id')->constrained('book_copies')->onDelete('cascade');
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->boolean('status')->default(1); // 1 = Kitobni olgan , 0 = Kitob qaytarilgan
             $table->date('kitob_olingan_vaqt');

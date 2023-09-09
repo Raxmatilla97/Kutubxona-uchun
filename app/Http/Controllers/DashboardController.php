@@ -6,11 +6,22 @@ use App\Models\BookCategory;
 use App\Models\Book;
 use App\Models\Student;
 use App\Models\BookStudent;
+use App\Models\BookCopy;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class DashboardController extends Controller
 {
-  
+
+    protected $image_book;
+    protected $image_article;
+
+    public function __construct()
+    {
+        $this->image_book =  url('/assets/images/book-test.webp');
+        $this->image_article = url('/assets/images/book-test3.webp');
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -53,9 +64,9 @@ class DashboardController extends Controller
             // Agarda proyekt bitirishida foydalanuvchi img si bo'lmasa default img qo'yishini ko'rsatamiz. != belgisini === ga o'zgartiramiz
             if ($student->img != "") { 
                 if ($student->student_or_ticher == 'student') {
-                    $student->img = "/assets/images/3432396.png";
+                    $student->img = $this->image_book;
                 }else{               
-                    $student->img = "/assets/images/avatar.png";
+                    $student->img = $this->image_article;
                 }
             }
            
@@ -80,9 +91,9 @@ class DashboardController extends Controller
              // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
              if ($kitob->image == "") { 
                 if ($kitob->book_or_article == 'book') {
-                    $kitob->image = "/assets/images/book-test.webp";
+                    $kitob->image = $this->image_book;
                 }else{               
-                    $kitob->image = "/assets/images/book-test3.webp";
+                    $kitob->image = $this->image_article;
                 }
             }
 
@@ -102,38 +113,7 @@ class DashboardController extends Controller
                 'kitoblar' => $kitoblar,
 
             ]);
-    }
-
-   
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request['rate'] = 4;
-       
-        request()->validate(['rate' => 'required']);
-
-        $post = Post::find($request->id);
-
-
-
-        $rating = new \willvincent\Rateable\Rating;
-
-        $rating->rating = $request->rate;
-
-        $rating->user_id = auth()->user()->id;
-
-
-
-        $post->ratings()->save($rating);
-
-
-
-        return redirect()->route("posts");
-    }
-
+    }   
     
     public function booksList()
     {
@@ -146,17 +126,7 @@ class DashboardController extends Controller
             ->orderByDesc('created_at')            
             ->paginate(28);
 
-        foreach ($all_books as $book) {    
-            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
-            if ($book->image == "") { 
-                if ($book->book_or_article == 'book') {
-                    $book->image = "/assets/images/book-test.webp";
-                }else{               
-                    $book->image = "/assets/images/book-test3.webp";
-                }
-            }
-            
-        }        
+        $all_books = $this->imageDeffault($all_books);
      
         return view('library.books-list', compact('list_category', 'all_books'));
     }
@@ -199,17 +169,7 @@ class DashboardController extends Controller
 
         $all_books = $query->paginate(28);
       
-        foreach ($all_books as $book) {    
-            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
-            if ($book->image == "") { 
-                if ($book->book_or_article == 'book') {
-                    $book->image = "/assets/images/book-test.webp";
-                }else{               
-                    $book->image = "/assets/images/book-test3.webp";
-                }
-            }
-            
-        }        
+        $all_books = $this->imageDeffault($all_books);
      
         $list_category = BookCategory::get();
 
@@ -221,17 +181,7 @@ class DashboardController extends Controller
         $list_category = BookCategory::get();
         $all_books = Book::where('book_or_article', 'book')->paginate(28);
         
-        foreach ($all_books as $book) {    
-            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
-            if ($book->image == "") { 
-                if ($book->book_or_article == 'book') {
-                    $book->image = "/assets/images/book-test.webp";
-                }else{               
-                    $book->image = "/assets/images/book-test3.webp";
-                }
-            }
-            
-        }       
+        $all_books = $this->imageDeffault($all_books);  
 
         return view('library.books-list', compact('list_category', 'all_books'));
     }
@@ -241,17 +191,7 @@ class DashboardController extends Controller
         $list_category = BookCategory::get();
         $all_books = Book::where('book_or_article', 'article')->paginate(28);
         
-        foreach ($all_books as $book) {    
-            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
-            if ($book->image == "") { 
-                if ($book->book_or_article == 'book') {
-                    $book->image = "/assets/images/book-test.webp";
-                }else{               
-                    $book->image = "/assets/images/book-test3.webp";
-                }
-            }
-            
-        }       
+        $all_books = $this->imageDeffault($all_books); 
 
         return view('library.books-list', compact('list_category', 'all_books'));
     }
@@ -264,36 +204,108 @@ class DashboardController extends Controller
             $query->where('slug', $slug);
         })->paginate(28);
 
-        foreach ($all_books as $book) {    
-            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
-            if ($book->image == "") { 
-                if ($book->book_or_article == 'book') {
-                    $book->image = "/assets/images/book-test.webp";
-                }else{               
-                    $book->image = "/assets/images/book-test3.webp";
-                }
-            }
-            
-        }
+        $all_books = $this->imageDeffault($all_books);
 
         return view('library.books-list', compact('list_category', 'all_books'));
     }
 
     public function libraryBookDetal($slug)
-    {
+    {       
         $list_category = BookCategory::get();
         $book = Book::where('slug', $slug)->first();
-    
+
         // Kitobning surati bo'lmasa, uchun default surat birlashtiramiz.
         if ($book && $book->image == "") { 
             if ($book->book_or_article == 'book') {
-                $book->image = "/assets/images/book-test.webp";
+                $book->image = $this->image_book;
             } else {               
-                $book->image = "/assets/images/book-test3.webp";
+                $book->image = $this->image_article;
+            }
+        } 
+
+        // Your existing code...
+        $bookCopies = BookCopy::where('book_id', $book->id)->get();
+        $result = collect();
+
+        foreach ($bookCopies as $bookCopy) {
+            $student_book_copy = BookStudent::where('book_copy_id', $bookCopy->id)->first();
+
+            if ($student_book_copy) {
+                $result->push([
+                    'book_copy_id' => $bookCopy->id,
+                    'student_name' => $student_book_copy->student->fish,
+                    'inventor_number' => $bookCopy->inventor_number,
+                    'isset_book' => $bookCopy->isset_book,
+                    'kitob_olingan_vaqt' => $student_book_copy->kitob_olingan_vaqt,
+                ]);
             }
         }
-     
-        return view('library.book-detal', compact('list_category', 'book'));
+        $result_count = $result->count();
+        // New code to paginate the collection...
+        $page = request('page', 1); // Get the current page or default to 1
+        $perPage = 18; // Number of items per page
+        $offset = ($page * $perPage) - $perPage;
+
+        $paginatedItems = new LengthAwarePaginator(
+            array_slice($result->toArray(), $offset, $perPage, true), // Only grab the items we need
+            count($result), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => request()->url(), 'query' => request()->query()] // Page path and query
+        );
+       
+        $bookCopies = $paginatedItems;
+       
+        return view('library.book-detal', compact('list_category', 'book', 'bookCopies', 'result_count'));
     }
+
+    private function imageDeffault($all_books)
+    {
+        
+        foreach ($all_books as $book) { 
+               
+            // Kitobni surati bo'lmasa unga default surat birlashtiramiz.
+            if ($book->image == "") { 
+                if ($book->book_or_article == 'book') {
+                    $book->image = $this->image_book;
+                }else{               
+                    $book->image = $this->image_article;
+                }
+            }
+            
+        }   
+        return $all_books;
+    }
+
+    
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    // public function store(Request $request)
+    // {
+    //     $request['rate'] = 4;
+       
+    //     request()->validate(['rate' => 'required']);
+
+    //     $post = Post::find($request->id);
+
+
+
+    //     $rating = new \willvincent\Rateable\Rating;
+
+    //     $rating->rating = $request->rate;
+
+    //     $rating->user_id = auth()->user()->id;
+
+
+
+    //     $post->ratings()->save($rating);
+
+
+
+    //     return redirect()->route("posts");
+    // }
+
     
 }

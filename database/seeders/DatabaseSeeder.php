@@ -16,9 +16,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Yolg'on ma'lumotlar generatsiyasi uchun
+        $this->call(AdminSeeder::class);       
         $this->call(BookCategory::class);
         $this->call(BooksSeeder::class);
         $this->call(StudentsTableSeeder::class);
+        $this->call(BookCopySeeder::class);        
         $this->call(StudentBooksSeeder::class);
         
     }

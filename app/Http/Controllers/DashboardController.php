@@ -17,9 +17,14 @@ class DashboardController extends Controller
     protected $image_article;
 
     public function __construct()
-    {
+    {   
+        // Kitob va maqolalar uchun default rasmlar
         $this->image_book =  url('/assets/images/book-test.webp');
         $this->image_article = url('/assets/images/book-test3.webp');
+
+        // Talabalar uchun default rasmlar
+        $this->image_teacehr =  url('/assets/images/avatar.png');
+        $this->image_student = url('/assets/images/1434240.png');
 
     }
     /**
@@ -64,9 +69,9 @@ class DashboardController extends Controller
             // Agarda proyekt bitirishida foydalanuvchi img si bo'lmasa default img qo'yishini ko'rsatamiz. != belgisini === ga o'zgartiramiz
             if ($student->img != "") { 
                 if ($student->student_or_ticher == 'student') {
-                    $student->img = $this->image_book;
+                    $student->img = $this->image_student;
                 }else{               
-                    $student->img = $this->image_article;
+                    $student->img = $this->image_teacehr;
                 }
             }
            
@@ -223,7 +228,7 @@ class DashboardController extends Controller
             }
         } 
 
-        // Your existing code...
+        // Kitob nusxalari va ularni olgan o'quvchilar haqida
         $bookCopies = BookCopy::where('book_id', $book->id)->get();
         $result = collect();
 
@@ -237,26 +242,44 @@ class DashboardController extends Controller
                     'inventor_number' => $bookCopy->inventor_number,
                     'isset_book' => $bookCopy->isset_book,
                     'kitob_olingan_vaqt' => $student_book_copy->kitob_olingan_vaqt,
+                    'kitob_qaytarilgan_vaqt' => $student_book_copy->kitob_qaytarilgan_vaqt,
+                    'kitob_qaytarish_kerak_bolgan_vaqt' => $student_book_copy->kitob_qaytarish_kerak_bolgan_vaqt,
                 ]);
             }
         }
+
         $result_count = $result->count();
-        // New code to paginate the collection...
-        $page = request('page', 1); // Get the current page or default to 1
-        $perPage = 18; // Number of items per page
+        // Collecsiyadagi paginatsiya haqidagi yangi kod
+        $page = request('page', 1); // Sahifalar 1 dan boshlanadi
+        $perPage = 18; // Paginatsiya qilinadigan itemslar raqami
         $offset = ($page * $perPage) - $perPage;
 
         $paginatedItems = new LengthAwarePaginator(
-            array_slice($result->toArray(), $offset, $perPage, true), // Only grab the items we need
-            count($result), // Total items
-            $perPage, // Items per page
-            $page, // Current page
-            ['path' => request()->url(), 'query' => request()->query()] // Page path and query
+            array_slice($result->toArray(), $offset, $perPage, true), 
+            count($result),
+            $perPage,
+            $page, 
+            ['path' => request()->url(), 'query' => request()->query()] 
         );
        
         $bookCopies = $paginatedItems;
+
+        // O'xshash resurslarni kodlari
+        $keywords = explode(' ', $book->title);
+
+        $oxshashResurslar = Book::where('status', 1)
+            ->where(function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('title', 'like', '%' . $keyword . '%');
+                }
+            })
+            ->orderBy('title')
+            ->limit(11)
+            ->get();
+
+            $oxshashResurslar = $this->imageDeffault($oxshashResurslar);  
        
-        return view('library.book-detal', compact('list_category', 'book', 'bookCopies', 'result_count'));
+        return view('library.book-detal', compact('list_category', 'book', 'bookCopies', 'result_count', 'oxshashResurslar'));
     }
 
     private function imageDeffault($all_books)

@@ -26,8 +26,9 @@
                                <th>Kitob inventar raqami</th>
                                <th>Holati</th>
                                <th>Talaba F.I</th>
-                               <th>Qaytarish kuni</th>  
-                               <th>Amaliyot</th>
+                               <th>Kitob olingan vaqt</th>  
+                               <th>Qaytarish vaqti</th>
+                               <th>Qaytarilgan vaqt</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,15 +47,10 @@
                                     <span class="badge iq-bg-primary">Kitob kutubxonada</span>
                                  @endif                                
                               </td>
-                              <td ><img class="rounded img-fluid avatar-40 mr-3" src="{{ asset('assets/images/user/01.jpg')}}" alt="profile">{{ $item['student_name'] }}</td>                              
-                              <td class="text-center">{{ $item['kitob_olingan_vaqt'] }}</td>                              
-                              <td>
-                                 <div class="flex align-items-center list-user-action">
-                                    <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add" href="#"><i class="ri-user-add-line"></i></a>
-                                    <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>
-                                    <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-                                 </div>
-                              </td>
+                              <td @if($item['isset_book'] == 1) style="opacity: 30%; text-decoration: line-through;" @endif><img class="rounded img-fluid avatar-40 mr-3" src="{{ asset('assets/images/user/01.jpg')}}" alt="profile">{{ $item['student_name'] }}</td>                              
+                              <td @if($item['isset_book'] == 1) style="opacity: 30%; text-decoration: line-through;" @endif class="text-center">{{ $item['kitob_olingan_vaqt'] }}</td>              
+                              <td @if($item['isset_book'] == 1) style="opacity: 30%; text-decoration: line-through;" @endif class="text-center">{{ $item['kitob_qaytarilgan_vaqt'] }}</td>                              
+                              <td class="text-center">{{ $item['kitob_qaytarish_kerak_bolgan_vaqt'] }}</td>
                            </tr>
                            @endforeach
                             

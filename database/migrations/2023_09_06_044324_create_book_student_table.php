@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('status')->default(1); // 1 = Kitobni olgan , 0 = Kitob qaytarilgan
             $table->date('kitob_olingan_vaqt');
             $table->date('kitob_qaytarilgan_vaqt')->nullable();
+            $table->date('kitob_qaytarish_kerak_bolgan_vaqt')->nullable();
             $table->text('kitobning_holati')->nullable();
             $table->timestamps();
         });

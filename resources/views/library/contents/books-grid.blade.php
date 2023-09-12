@@ -5,7 +5,7 @@
              <h4 class="card-title mb-0">Kutubxona adabiyotlari</h4>
           </div>
           <div class="iq-card-header-toolbar d-flex align-items-center">                              
-             <a href="category.html" class="btn btn-sm btn-primary view-more">Barchasini ko'rish</a>
+             <a href="{{ route('dashboard.library-books')}}" class="btn btn-sm btn-primary view-more">Barchasini ko'rish</a>
           </div>
        </div> 
        <div class="iq-card-body">  

@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\BookCategory;
 use App\Models\Book;
+use App\Models\Author;
 use App\Models\Student;
 use App\Models\BookStudent;
 use App\Models\BookCopy;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class DashboardController extends Controller
+class LibraryController extends Controller
 {
 
     protected $image_book;
     protected $image_article;
+    protected $image_teacehr;
+    protected $image_student;
 
     public function __construct()
     {   
@@ -27,8 +30,9 @@ class DashboardController extends Controller
         $this->image_student = url('/assets/images/1434240.png');
 
     }
+
     /**
-     * Display a listing of the resource.
+     * Asosiy sahifadagi resurslar uchun yaratilgan funksiya
      */
     public function index()
     {          
@@ -119,7 +123,10 @@ class DashboardController extends Controller
 
             ]);
     }   
-    
+
+    /**
+     * SITE_URL/library/resurs dagi resurslarni chaqirish uchun yaratilgan funksiya
+     */    
     public function booksList()
     {
         // Chap tarafdagi menyudagi kitob bo'limlarini chiqaradi
@@ -136,18 +143,24 @@ class DashboardController extends Controller
         return view('library.books-list', compact('list_category', 'all_books'));
     }
 
+    /**
+     * Site search qilinganda mualiflarni ism sharifini chiqarish uchun funksiya
+     */ 
     public function getAuthors(Request $request)
     {
         // Ma'lumotlar bazasidan avtor nomlarini olish
-        $authors = Book::orderBy('mualif', 'asc')->pluck('mualif');
+        $authors = Author::orderBy('fish', 'asc')->pluck('fish');
 
         // JSON formatida javobni qaytarish
         return response()->json(['authors' => $authors]);
     }
 
+    /**
+     * Site search qilish uchun funksiya controlleri
+     */ 
+    
     public function booksSearch(Request $request)
     {    
-       
         $book_or_article = $request->input('book_or_article');
         $category = $request->input('category');
         $year = $request->input('year');
@@ -156,31 +169,36 @@ class DashboardController extends Controller
 
         $query = Book::query();
 
-        
         if ($book_or_article) {
             $query->where('book_or_article', $book_or_article);
         }
+
         if ($year) {
             $query->where('chiqarilgan_yili', $year);
         }
-    
+
         if ($author) {
-            $query->where('mualif', 'like', '%' . $author . '%');          
+            $query->whereHas('authors', function ($query) use ($author) {
+                $query->where('fish', 'like', '%' . $author . '%');
+            });
         }
 
         if ($text) {
-            $query->where('title', 'like', '%' . $text . '%');          
+            $query->where('title', 'like', '%' . $text . '%');
         }
 
         $all_books = $query->paginate(28);
-      
+
         $all_books = $this->imageDeffault($all_books);
-     
+
         $list_category = BookCategory::get();
 
         return view('library.books-list', compact('list_category', 'all_books'));
     }
 
+    /**
+     * Faqat Kitoblarni ko'rish uchun mo'ljallangan funksiya
+     */ 
     public function libraryBooks()
     {
         $list_category = BookCategory::get();
@@ -191,6 +209,9 @@ class DashboardController extends Controller
         return view('library.books-list', compact('list_category', 'all_books'));
     }
 
+    /**
+     * Faqat Maqolalarni ko'rish uchun mo'ljallangan funksiya
+     */
     public function libraryArticles()
     {
         $list_category = BookCategory::get();
@@ -201,6 +222,9 @@ class DashboardController extends Controller
         return view('library.books-list', compact('list_category', 'all_books'));
     }
 
+    /**
+     * Kutubxona bo'limlarini chiqaradigan funksiya
+     */
     public function libraryBooksCategory($slug)
     {     
         $list_category = BookCategory::get();
@@ -214,6 +238,9 @@ class DashboardController extends Controller
         return view('library.books-list', compact('list_category', 'all_books'));
     }
 
+    /**
+     * Resursni sahifasi unda shu resurs haqida ma'lumotlar beriladi
+     */
     public function libraryBookDetal($slug)
     {       
         $list_category = BookCategory::get();
@@ -282,6 +309,9 @@ class DashboardController extends Controller
         return view('library.book-detal', compact('list_category', 'book', 'bookCopies', 'result_count', 'oxshashResurslar'));
     }
 
+    /**
+     * Barcha funksiyalardagi IMG larni default image ga aylanmtirish funksiyasi
+     */
     private function imageDeffault($all_books)
     {
         
@@ -300,7 +330,29 @@ class DashboardController extends Controller
         return $all_books;
     }
 
+    public function libraryAuthors()
+    {
+        $list_category = BookCategory::get();
+        $list_authors = Author::orderBy('fish', 'asc')->where('status', '1')->paginate('25');
+       
+        return view('library.contents.authors-list', compact('list_category', 'list_authors'));
+    }
     
+    public function libraryAuthorBooks($request)
+    {      
+        $list_category = BookCategory::get();       
+        $author = Author::where('status', '1')->where('slug', $request)->first();
+           
+        if ($author) {
+            $all_books = $author->books()->paginate(15);
+        } else {
+            $all_books = collect();
+        }
+        $message_header = "Mualifga tegishli barcha resurslar ro'yxati";
+        $all_books = $this->imageDeffault($all_books);
+
+        return view('library.books-list', compact('list_category', 'all_books', 'message_header', 'author'));
+    }
 
     /**
      * Store a newly created resource in storage.

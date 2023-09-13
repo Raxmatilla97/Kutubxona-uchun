@@ -103,7 +103,13 @@
                  <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between align-items-center position-relative mb-0 similar-detail">
                         <div class="iq-header-title">
-                           <h4 class="card-title mb-0">Barcha kutubxona resurslari (Kitoblar, Maqolalar)</h4>
+                           <h4 class="card-title mb-0">
+                            @if (isset($message_header))
+                                  {{ $message_header }} : <p style="display: inline; color: var(--iq-primary);">{{ $author->fish }}</p>
+                            @else
+                                Barcha kutubxona resurslari (Kitoblar, Maqolalar)
+                            @endif
+                            </h4>
                         </div>                        
                      </div>   
                     <div class="iq-card-body">

@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('book_inventar_number')->nullable();
             $table->string('book_or_article')->nullable();
             $table->string('nashriyot_nomi')->nullable();
-            $table->string('chiqarilgan_yili')->nullable();
-            $table->string('mualif')->nullable();
+            $table->string('chiqarilgan_yili')->nullable();            
             $table->string('isbn_issn')->nullable();
             $table->string('sahifa_soni_va_olcham')->nullable();
             $table->string('nechanchi_nashr')->nullable();

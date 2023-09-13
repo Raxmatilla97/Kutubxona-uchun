@@ -26,6 +26,8 @@ class AuthorsSeeder extends Seeder
                 'slug' => Str::slug($faker->name),
                 'img' => $faker->imageUrl(),
                 'desc' => $faker->paragraph,
+                'telefon' => $faker->phoneNumber,
+                'email' => $faker->email,
                 'univer_employee' => $faker->boolean,
                 'status' => $faker->boolean,               
             ]);

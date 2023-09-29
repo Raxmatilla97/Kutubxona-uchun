@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/library/books/{category}', [LibraryController::class, 'libraryBooksCategory'])->name('dashboard.library-books-category');
     Route::get('/library/book/{slug}', [LibraryController::class, 'libraryBookDetal'])->name('dashboard.library-book-detal');
     Route::get('/library/authors', [LibraryController::class, 'libraryAuthors'])->name('dashboard.library-authors');
+    Route::post('/library/author', [AuthorController::class, 'store'])->name('dashboard.library-author-store');
     Route::get('/library/author-books/{slug}', [LibraryController::class, 'libraryAuthorBooks'])->name('dashboard.library-author-books');
 
     // Route::post('/library/{id}', [LibraryController::class, 'store'])->name('dashboard.library.store');

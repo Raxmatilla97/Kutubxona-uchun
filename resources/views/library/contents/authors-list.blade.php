@@ -21,6 +21,29 @@
                    <div class="iq-header-title">
                       <h4 class="card-title">Mualliflar ro'yxati</h4>
                    </div>
+                  @if (session('success'))                     
+                     <div class="alert alert-success" role="alert">
+                        <div class="iq-alert-icon">
+                           <i class="ri-alert-line"></i>
+                        </div>
+                        <div class="iq-alert-text"> {{ session('success') }}</div>
+                     </div>
+                  @endif
+
+                  @if (session('error'))
+                     <div class="alert alert-danger">
+                        {{ session('error') }}
+                     </div>
+                  @endif
+             
+                  @if ($errors->any())
+                     <div class="alert alert-danger" role="alert">
+                           <div class="iq-alert-icon">
+                              <i class="ri-information-line"></i>
+                           </div>
+                           <div class="iq-alert-text">Formada xato mavjud! Iltimos, qayta urinib ko'ring.</div>
+                     </div>
+                  @endif
                    <div class="iq-card-header-toolbar d-flex align-items-center">             
 
                       <button type="button" class="btn btn-primary rmt-5" data-toggle="modal" data-target="#exampleModalCenteredScrollable">
@@ -36,17 +59,26 @@
                                     <span aria-hidden="true">×</span>
                                     </button>
                                  </div>
-                                 <form>
-                                 <div class="modal-body">                                    
-                                    <div class="form-group">
-                                       <label for="fish">F.I.SH:</label>
-                                       <input type="text" class="form-control" id="fish" name="fish" placeholder="Muallifning F.I.SHni yozing.">
-                                    </div>                                   
+                                
+                                 <div class="modal-body">     
+                                    <form action="{{ route('dashboard.library-author-store')}}" method="POST" enctype="multipart/form-data">
+                                       @csrf
+                                       @method('POST')                         
+                                       <div class="form-group">
+                                          <label for="fish">F.I.SH:</label>
+                                          <input type="text" class="form-control" id="fish" name="fish" placeholder="Muallifning F.I.SHni yozing." value="{{ old('fish') }}">
+                                          @error('fish')
+                                          <small class="error-text form-text">{{ $message }}</small>
+                                          @enderror
+                                      </div>                                  
                                     <div class="form-group">
                                        <label for="img">Surat:</label>
                                        <div class="custom-file">
-                                       <input type="file" id="image-input" accept="image/*" class="custom-file-input" id="validatedCustomFile" required="">
+                                       <input type="file" id="image-input" name="img" accept="image/*" class="custom-file-input" value="{{ old('img') }}" id="validatedCustomFile">
                                        <label class="custom-file-label" for="validatedCustomFile">Suratni tanlang...</label>
+                                       @error('img')
+                                       <small class="error-text form-text">{{ $message }}</small>
+                                       @enderror
                                        {{-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
                                     </div>
                                     <div class="preview-container">
@@ -93,30 +125,49 @@
                                           height: 100%;
                                           object-fit: cover;
                                        }
+                                       .error-text {
+                                          color: red;
+                                       }
                                        </style>
                                     </div>
                                     <div class="form-group">
                                        <label for="desc">Muallif haqida:</label>
-                                       <textarea class="form-control" id="desc" name="desc" placeholder="Muallif haqida yozishingiz mumkin."></textarea>
+                                       <textarea class="form-control" id="desc" name="desc" placeholder="Muallif haqida yozishingiz mumkin.">{{ old('desc') }}</textarea>
+                                       @error('desc')
+                                       <small class="error-text form-text">{{ $message }}</small>
+                                       @enderror
                                     </div>
                                     <div class="form-group">
                                        <label for="telefon">Telefoni:</label>
-                                       <input type="number" class="form-control" id="telefon" name="telefon" placeholder="Muallifning telefon raqamini yozishingiz mumkin.">
-                                    </div>
+                                       <input type="number" class="form-control" id="telefon" name="telefon" value="{{ old('telefon') }}" placeholder="Muallifning telefon raqamini yozishingiz mumkin." pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                                       
+                                       @error('telefon')
+                                       <small class="error-text form-text">{{ $message }}</small>
+                                       @enderror
+                                     </div>
                                     <div class="form-group">
                                        <label for="email">Email:</label>
-                                       <input type="email" class="form-control" id="email" name="email" placeholder="Muallifning email manzilini yozishingiz mumkin.">
+                                       <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Muallifning email manzilini yozishingiz mumkin.">
+                                       @error('email')
+                                       <small class="error-text form-text">{{ $message }}</small>
+                                       @enderror
                                     </div>
                                     <div class="form-group">
                                        <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" id="univer_employee" name="univer_employee">
+                                          <input type="checkbox" class="form-check-input" id="univer_employee"  value="1"  name="univer_employee" {{ old('univer_employee') ? 'checked' : '' }}>
                                           <label class="form-check-label" for="univer_employee">OTM xodimi?</label>
+                                          @error('univer_employee')
+                                          <small class="error-text form-text">{{ $message }}</small>
+                                          @enderror
                                        </div>
                                     </div>
                                     <div class="form-group">
                                        <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" id="status" name="status">
+                                          <input type="checkbox" class="form-check-input" value="1" id="status" name="status" {{ old('status') ? 'checked' : '' }}>
                                           <label class="form-check-label" for="status">Aktivlashtirish</label>
+                                          @error('status')
+                                          <small class="error-text form-text">{{ $message }}</small>
+                                          @enderror
                                        </div>
                                     </div>                                    
                                    
@@ -150,9 +201,14 @@
                            
                         
                            @foreach ($list_authors as $item)
-                           <tr>
+                          
+                           <tr @if ($item->status == 0) style="opacity: 20%;" @endif>
                               <td class="text-center">{{ $i++ }}</td>
-                              <td><a href="{{ route('dashboard.library-author-books', $item->slug )}}" style="font-size: 20px;"><img style="display: inline-block!important;" class="rounded img-fluid avatar-60 mr-3 d-sm-none" src="{{ asset('assets/images/3432396.png')}}" alt="profile"> {{ $item->fish }}</a></td>
+                              <td><a href="{{ route('dashboard.library-author-books', $item->slug )}}" style="font-size: 20px;">
+                                 <img style="display: inline-block!important; border-radius: 50%;" class="img-fluid avatar-60 mr-3 d-sm-none" src="{{ $item->img }}" alt="{{ $item->fish }}">
+                                    {{ $item->fish }}
+                                 </a>
+                              </td>
                               <td>
                                 <p class="mb-0">
                                  <div class="row">

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('telefon')->nullable();
             $table->string('email')->nullable();
             $table->boolean('univer_employee')->default('0');
-            $table->boolean('status')->default('0');
+            $table->boolean('status')->default('1');
             $table->timestamps();
         });
     }

@@ -29,6 +29,9 @@ class LibraryController extends Controller
         $this->image_teacehr =  url('/assets/images/avatar.png');
         $this->image_student = url('/assets/images/1434240.png');
 
+        // Mualliflarni default rasmi uchun
+        $this->image_author = url('/assets/images/3432396.png');
+
     }
 
     /**
@@ -333,8 +336,14 @@ class LibraryController extends Controller
     public function libraryAuthors()
     {
         $list_category = BookCategory::get();
-        $list_authors = Author::orderBy('fish', 'asc')->where('status', '1')->paginate('25');
-       
+        $list_authors = Author::orderBy('created_at', 'desc')->paginate('25');
+        
+        foreach ($list_authors as $author) {  
+            if ($author->img == "") {              
+                    $author->img = $this->image_author;             
+            }            
+        }   
+
         return view('library.contents.authors-list', compact('list_category', 'list_authors'));
     }
     

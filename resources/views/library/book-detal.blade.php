@@ -105,8 +105,8 @@
                           </div>
 
                           
-                          
-                          <div class="col-md-6">
+                          @if($book->book_or_article == 'book')
+                            <div class="col-md-6">
                              <div class="iq-card-transparent iq-card-block iq-card-stretch iq-card-height">
                                 <div class="iq-card-body p-0">
                                    <h3 class="mb-3">{{ $book->title }}</h3>
@@ -207,6 +207,87 @@
                                 </div>
                              </div>
                           </div>
+                          @else
+                          <div class="col-md-6">
+                           <div class="iq-card-transparent iq-card-block iq-card-stretch iq-card-height">
+                              <div class="iq-card-body p-0">
+                                 <h3 class="mb-3">{{ $book->title }}</h3>
+                                 <div class="price d-flex align-items-center font-weight-500 mb-2">
+                                    <span class="font-size-20 pr-2 new-price">Resursga berilgan baho: </span>
+                                    <span class="font-size-20 ml-2 text-warning">
+                                      <i class="fa fa-star mr-1"></i>
+                                      {{-- <i class="fa fa-star mr-1"></i>
+                                      <i class="fa fa-star mr-1"></i>
+                                      <i class="fa fa-star mr-1"></i>
+                                      <i class="fa fa-star"></i> --}}
+                                      </span>
+                                 </div>
+                                 
+                                 <table class="table table-bordered">
+                                  <tbody>                                 
+                                    <tr>
+                                      <th scope="row">NASHRIYOT:</th>
+                                      <td>{{ $book->nashriyot_nomi }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">JOYLANGAN BO'LIMI:</th>
+                                      <td>{{ $book->BookCategory->title }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">MUALLIF(LAR):</th>
+                                      <td class="text-primary">{{ $book->mualif }}</td>
+                                    </tr>
+                                  
+                                  
+                                    <tr>
+                                      <th scope="row">KITOB YOZILGAN TIL:</th>
+                                      <td><span class="badge badge-pill border border-dark text-dark">{{ $book->yozilgan_tili }} (tilida yozilgan)</span></td>
+                                    </tr>
+                                   
+                                    <tr>
+                                      <th scope="row">MAVZU NOMI:</th>
+                                      <td>{{ $book->gmd_name }}</td>
+                                    </tr>                                  
+                                    <tr>
+                                      <th scope="row">QAYSI KUTUBXONA:</th>
+                                      <td>TVCHDPI ARM fondi</td>
+                                    </tr>
+                                  </tbody>
+                                </table>     
+
+                                 <div class="mb-4 d-flex align-items-center">                                       
+                                    <a href="#" class="btn btn-primary view-more mr-2">Kitob</a>
+                                    <a href="#" class="btn btn-primary view-more mr-2">Ertak</a>
+                                 </div>
+                                 <div class="mb-3">
+                                    <a href="book-page.html#" class="text-body text-center"><span class="avatar-30 rounded-circle bg-primary d-inline-block mr-2"><i class="ri-heart-fill"></i></span><span>Sevimli resurslar ro'yxatiga qo'shish</span></a>
+                                 </div>
+                                 <div class="iq-social d-flex align-items-center">
+                                  <h5 class="mr-2">Share:</h5>
+                                  <ul class="list-inline d-flex p-0 mb-0 align-items-center">
+                                     <li>
+                                        <a href="#" class="avatar-40 rounded-circle bg-primary mr-2 facebook"><i class="fa fa-facebook" aria-hidden="true" style="margin-top: 30%;"></i></a>
+                                     </li>
+                                     <li>
+                                        <a href="#" class="avatar-40 rounded-circle bg-primary mr-2 twitter"><i class="fa fa-twitter" aria-hidden="true" style="margin-top: 30%;"></i></a>
+                                     </li>
+                                     <li>
+                                        <a href="#" class="avatar-40 rounded-circle bg-primary mr-2 youtube"><i class="fa fa-youtube-play" aria-hidden="true" style="margin-top: 30%;"></i></a>
+                                     </li>
+                                     <li>
+                                        <a href="#" class="avatar-40 rounded-circle bg-primary pinterest"><i class="fa fa-pinterest-p" aria-hidden="true" style="margin-top: 30%;"></i></a>
+                                     </li>
+                                  </ul>
+                               </div>
+                              </div>
+                           </div>
+                        </div>
+                        @endif
+
+
+                         
+
+
                        </div>
                     </div>
                  </div>

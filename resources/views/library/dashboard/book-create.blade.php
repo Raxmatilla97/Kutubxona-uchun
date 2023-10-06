@@ -190,14 +190,14 @@
                                 <i class="ri-bookmark-fill text-danger"></i><span>ARM ma'lumotlari</span>
                                 </a>
                              </div>
-                             <div id="bank" class="wizard-step">
+                             <div id="confirm" class="wizard-step">
                                 <a href="#bank-detail" class="btn btn-default  active">
-                                <i class="ri-camera-fill text-success"></i><span>Fayl yuklash</span>
+                                <i class="ri-camera-fill text-warning"></i><span>Fayl yuklash</span>
                                 </a>
                              </div>
-                             <div id="confirm" class="wizard-step">
+                             <div id="bank" class="wizard-step">
                                 <a href="#cpnfirm-data" class="btn btn-default  active">
-                                <i class="ri-check-fill text-warning"></i><span>Tugatish</span>
+                                <i class="ri-check-fill text-success"></i><span>Tugatish</span>
                                 </a>
                              </div>
                           </div>
@@ -207,57 +207,65 @@
                              <div class="col-sm-12">
                                 <div class="col-md-12 p-0">
                                    <h3 class="mb-4">Asosiy ma'lumotlar:</h3>
+
+                                    <div class="w-50 m-auto">
+                                       <div class="alert alert-primary mb-4" role="alert">
+                                          <div class="iq-alert-icon">
+                                             <i class="ri-alert-line"></i>
+                                          </div>
+                                          <div class="iq-alert-text">
+                                             <h5 class="alert-heading">Eslatma!</h5>
+                                             <p>Formada <b class="text-red-600">*</b> belgisi uchragan joylarda albatta ma'lumot kiritishingiz kerak!
+                                                <br>
+                                                Agarda ma'lumotga ega bo'lmasangiz u qismga <b>Yo'q</b> deb yozib qo'ying.
+                                             </p>
+                                            
+                                                                                   
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <hr>
                                    <div class="row">
                                       <div class="form-group col-md-6">
-                                         <label for="title" class="control-label">Kitobning nomini yozing: *</label>
+                                         <label for="title" class="control-label">Kitobning nomini yozing: <b class="text-red-600">*</b></label>
                                          <input maxlength="100" type="text" id="title" name="title" required="required" class="form-control" placeholder="O'tgan kunlar...">
                                       </div>
                                       <div class="form-group col-md-6">
-                                         <label for="book_inventar_number"  class="control-label">Kitob inventar raqami: *</label>
+                                         <label for="book_inventar_number"  class="control-label">Kitob inventar raqami: <b class="text-red-600">*</b></label>
                                          <input maxlength="100" type="text" id="book_inventar_number" required="required" name="book_inventar_number" class="form-control" placeholder="12345">
                                       </div>
                                      
                                       <div class="col-md-6 form-group">
-                                         <label for="nashriyot_nomi" class="control-label">Nashriyot nomi: *</label>
+                                         <label for="nashriyot_nomi" class="control-label">Nashriyot nomi: <b class="text-red-600">*</b></label>
                                          <input type="text" class="form-control" id="nashriyot_nomi" required="required" name="nashriyot_nomi"  value="{{ old('nashriyot_nomi')}}" placeholder="Sharq nashiryoti">
                                       </div>
                                       <div class="col-md-6 form-group">
-                                         <label for="chiqarilgan_yili" class="control-label">Chiqarilgan yili: *</label>
+                                         <label for="chiqarilgan_yili" class="control-label">Chiqarilgan yili: <b class="text-red-600">*</b></label>
                                          <input type="text" id="chiqarilgan_yili" class="form-control" required="required" name="chiqarilgan_yili" value="{{ old('chiqarilgan_yili')}}" placeholder="2023">
                                       </div>                                     
                                       <div class="col-md-6 form-group">
-                                         <label for="isbn_issn" class="control-label">ISBN yoki ISSN: *</label>
+                                         <label for="isbn_issn" class="control-label">ISBN yoki ISSN: <b class="text-red-600">*</b></label>
                                          <input type="text" class="form-control" required="required" id="isbn_issn" name="isbn_issn" value="{{ old('isbn_issn')}}" placeholder="ISBN-123456">
                                       </div>
                                       <div class="col-md-6 form-group">
-                                        <label for="sahifa_soni_va_olcham" class="control-label">Sahifa soni va o'lchami: *</label>
+                                        <label for="sahifa_soni_va_olcham" class="control-label">Sahifa soni va o'lchami: <b class="text-red-600">*</b></label>
                                         <input type="text" class="form-control" required="required" id="sahifa_soni_va_olcham" name="sahifa_soni_va_olcham" value="{{old('sahifa_soni_va_olcham')}}" placeholder="200 varoq 30x20">
                                      </div>
                                      <div class="col-md-6 form-group">
-                                        <label for="nechanchi_nashr" class="control-label">Nechanchi nashrligi: *</label>
+                                        <label for="nechanchi_nashr" class="control-label">Nechanchi nashrligi: <b class="text-red-600">*</b></label>
                                         <input type="text" class="form-control" required="required" id="nechanchi_nashr" name="nechanchi_nashr" value="{{ old('nechanchi_nashr')}}" placeholder="1-chi nashr">
                                      </div>
                                      <div class="col-md-6 form-group">
-                                        <label for="classificatsiya" class="control-label">Resurs klasifikatsiyasi: *</label>
+                                        <label for="classificatsiya" class="control-label">Resurs klasifikatsiyasi: <b class="text-red-600">*</b></label>
                                         <input type="text" class="form-control" required="required" id="classificatsiya" name="classificatsiya" value="{{ old('classificatsiya')}}" placeholder="323(575.1)">
                                      </div>                                    
                                       <div class="col-md-12 mb-3 form-group">
                                          <label for="address" class="control-label">Resurs haqida qisqacha ma'lumotlar bo'lsa: </label>
-                                         <textarea name="address" class="form-control" id="address" rows="5" required="required"></textarea>
+                                         <textarea name="address" class="form-control" id="address" rows="5"></textarea>
                                       </div>
-                                      <div class="form-group col-sm-6">
-                                        <label class="d-block">Kitob katalogda ko'rsatish uchun tayyormi?:</label>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                           <input type="radio" id="ready" name="status" value="{{ old('status', 1)}}" class="custom-control-input" checked="">
-                                           <label class="custom-control-label" for="ready"> Ha, Kitob ma'lumotlari tog'ri va ko'rsatish uchun tayyor! </label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                           <input type="radio" id="noReady" name="status" value="{{ old('status', 0)}}" class="custom-control-input">
-                                           <label class="custom-control-label" for="noReady"> Yoq, Kitob ma'lumotlari ohirigacha yetmagan! </label>
-                                        </div>
-                                     </div>
+                                     
                                    </div>
-                                   <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Keyingisi</button>
+                                   <button class="btn btn-primary nextBtn btn-lg pull-right mt-4" type="button">Keyingisi</button>
                                 </div>
                              </div>
                           </div>
@@ -268,8 +276,8 @@
                                    <div class="row">
 
                                     <div class="form-group col-sm-6">
-                                        <label for="users">Resursga javobgar:</label>
-                                        <select class="form-control" name="kitobga_javobgar_id" id="users">
+                                        <label for="users">Resursga javobgar: <b class="text-red-600">*</b></label>
+                                        <select class="form-control" name="kitobga_javobgar_id" id="users" required>
                                            <option selected="">Tanlang</option>
                                            @foreach($users as $user)
                                             <option class="{{$user->id}}">{{$user->name}}</option>
@@ -278,8 +286,8 @@
                                      </div>
 
                                      <div class="form-group col-sm-6">
-                                        <label for="category">Resurs bo'limini tanlang:</label>
-                                        <select class="form-control" name="book_category_id" id="category">
+                                        <label for="category">Resurs bo'limini tanlang: <b class="text-red-600">*</b></label>
+                                        <select class="form-control" name="book_category_id" id="category" required>
                                            <option selected="">Tanlang</option>
                                            @foreach($categores as $category)
                                             <option class="{{$category->id}}">{{$category->title}}</option>
@@ -288,15 +296,15 @@
                                      </div>                                
                                         <div class="col-md-12 form-group">
                                          <div class="form-group">
-                                            <label for="tags" class="control-label">Taglarni kiriting: *</label>
+                                            <label for="tags" class="control-label">Resurs mazmunidan kelib chiqib unga mos kalit so‘zlarni tanlang: <b class="text-red-600">*</b></label>
                                             <input type="tags" class="w-full px-4 py-6 text-md border border-gray-300 rounded outline-none" value="Kitob" required="required" id="tags" name="tags" >
                                          </div>
                                       </div>
                                       <div class="col-md-12 form-group">
                                        <div class="form-check">
                                           <input class="form-check-input" type="checkbox" value="1" name="tafsiya_etiladi" id="tafsiya_etiladi" required="">
-                                          <label class="form-check-label" for="tafsiya_etiladi">
-                                          Tafsiya etiladigan resurs hisoblanadimi?
+                                          <label class="form-check-label ml-2" for="tafsiya_etiladi" style="font-size: 18px"> 
+                                             Tafsiya etiladigan resurs hisoblanadimi? 
                                           </label>
                                        </div>
                                     </div>
@@ -309,18 +317,89 @@
                           <div class="row setup-content" id="bank-detail" style="display: none;">
                              <div class="col-sm-12">
                                 <div class="col-md-12 p-0">
-                                   <h3 class="mb-8">Resurs fayllarini yuklash:</h3>
-                                   <div class="form-row flex justify-around">
-                                    <div class="col-md-5 mb-3 mx-5">                                     
-                                       <input type="file" class="custom-file-input" id="image" required="">
+                                   <h3 class="mb-8">Resurs fayllarini yuklash: <b class="text-red-600">*</b></h3>
+                                   <div class="form-row flex justify-between">
+
+                                    <div class="col-md-6 mb-3">
+                                       <input type="file" class="custom-file-input" id="image" accept="image/*" required>
                                        <label class="custom-file-label" for="image">Resurs muqova suratini yuklang...</label>
-                                       <div class="invalid-feedback">Surat yuklanishi kerak</div>
-                                    </div>
+                                       <div class="invalid-feedback">Surat yuklanishi kerak</div>                                       
+
+                                       <div class="alert text-white bg-primary mt-3" role="alert">
+                                          <div class="iq-alert-icon">
+                                             <i class="ri-alert-line"></i>
+                                          </div>
+                                          <div class="iq-alert-text">Etibor bering! <b>FAYL YUKLASHDA ADASHMANG</b> Bu qismni o'qib keyin fayllarni yuklang.
+                                             <style>
+                                                .whiteDot {
+                                                  height: 10px;
+                                                  width: 10px;
+                                                  background-color: white;
+                                                  border-radius: 50%;
+                                                  display: inline-block;
+                                                  margin-right: 8px;
+                                                }
+                                              </style>
+                                              
+                                              <p class="text-gray-500"> 
+                                              <ul class="list-disc pl-5"> 
+                                                <li class="py-1"><span class="whiteDot"></span>Birinchi yuklanadigan qism bu Resurs muqova qismi hisoblanadi! Unga faqat surat <span class="font-bold">(png, jpg)</span> yuklang, hajmi <span class="font-bold">[1mb dan oshmasin!]</span>. Muqava surati vertikal holatda bo'lishi lozim (yani o'ng tarafdagi namuna kabi!)</li>
+                                                 <hr>
+                                                <li class="py-1"><span class="whiteDot"></span>Ikkinchi yuklanadigan qism bu Resursni elektron ko'rinishi! Unga faqat <span class="font-bold">(pdf)</span> yuklang, hajmi <span class="font-bold">[5mb dan oshmasin!]</span>.</li> 
+                                              </ul> 
+                                              </p>
+                                          </div>
+                                         
+                                       </div>
+                                   </div>
+
+                                   
+                                   
+                                   <div id="image-preview" class="col-md-6 flex justify-center">
+                                       <!-- Standart image ko'rinadi -->
+                                       <img src="http://127.0.0.1:8000/assets/images/book-test.webp" id="preview-image"/>
+                                   </div>
+                                   
+                                   <script>
+                                       const imageUpload = document.getElementById('image');
+                                       const imagePreview = document.getElementById('image-preview');
+                                       const previewImage = document.getElementById('preview-image');
+                                   
+                                       imageUpload.addEventListener('change', function() {
+                                           const file = imageUpload.files[0];
+                                           const reader = new FileReader();
+                                   
+                                           reader.onload = function(e) {
+                                               previewImage.src = e.target.result;
+                                           }
+                                   
+                                           reader.readAsDataURL(file);
+                                       });
+                                   </script>
+                                   
+                                   <style>
+                                       #image-preview {
+                                          display: flex;
+                                          justify-content: center;
+                                          align-items: center;
+                                          max-height: 30%;                                         
+                                          padding: 5px;
+                                       }
+                                       
+                                       #image-preview img, #preview-image {
+                                          max-height: 332px;
+                                          width: auto;
+                                          border: 1px solid #ddd;
+                                          border-radius: 4px;
+                                          padding: 5px;
+                                       }
+                                   </style>
+                                   <hr class="border border-gray-200 my-4" />
                                     @push('styles')
                                     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />      
                                     @endpush
                                  
-                                       <div class="col-md-12 mt-8 mx-5">
+                                       <div class="col-md-12 mt-8">
                                           <div class="flex items-center justify-center max-w-full mb-7">
                                              <div class="relative text-center hidden md:block">
                                                <h4 class="shadow-sm relative rounded-md text-md border  border-gray-200   rounded-t-lg  font-medium px-1 py-3 right-2 ">
@@ -375,7 +454,20 @@
                                    
 
                                    </div>
-                                   <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+
+                                   <div class="alert bg-white alert-secondary" role="alert">
+                                    <div class="iq-alert-icon">
+                                       <i class="ri-information-line"></i>
+                                    </div>
+                                    <div class="iq-alert-text">Agarda Fayl hajmi <b>katta</b> bo'lsa!
+                                       <ol class="list-decimal list-inside space-y-2 px-5 py-4 bg-gray-100 rounded-md text-sm text-gray-700">
+                                          <li>Suratlar uchun <b><a href="https://compresspng.com/" target="_blank" class="text-blue-500 underline">compresspng.com</a></b> dan foydalangan holda surat hajmini kichraytirishingiz mumkin!</li>
+                                          <hr>
+                                          <li>PDF fayl hajmi kotta bo'lganda <b><a href="https://shrinkpdf.com/" target="_blank" class="text-blue-500 underline">shrinkpdf.com</a></b> dan foydalangan holda fayl hajmini kichraytirishingiz mumkin!</li>
+                                      </ol>
+                                    </div>
+                                 </div>
+                                   <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Keyingisi</button>
                                 </div>
                              </div>
 
@@ -384,10 +476,32 @@
                           <div class="row setup-content" id="cpnfirm-data" style="display: none;">
                              <div class="col-sm-12">
                                 <div class="col-md-12 p-0">
-                                   <h3 class="mb-4 text-left">Finish:</h3>
-                                   <div class="row justify-content-center">
-                                      <div class="col-3"> <img src="images/page-img/img-success.png" class="fit-image" alt="img-success"> </div>
+                                   <h3 class="mb-4 text-left">Jarayonni tugatish qismi:</h3>
+
+                                   <div class="w-50 m-auto">
+                                    <div class="alert bg-white alert-primary" role="alert">
+                                       <div class="iq-alert-icon">
+                                          <i class="ri-alert-line"></i>
+                                       </div>
+                                       <div class="iq-alert-text">Ma'lumotlarda xato bo'lmasligi uchun yana bir-bor <b>tekshirib</b> oling!</div>
+                                    </div>
                                    </div>
+                                   <div class="row justify-content-center">                                    
+                                      <div class="col-3"> <img src="https://cdn.dribbble.com/users/1751799/screenshots/5512482/check02.gif" class="fit-image" alt="img-success"> </div>
+                                   </div>
+                                   <div class="m-auto" style="width: 900px;">
+                                       <div class="form-group col-sm-12 " style="font-size: 18px;">
+                                          <label class="d-block">Kitob saytda ko'rsatish uchun tayyormi?:</label>
+                                          <div class="custom-control custom-radio custom-control-inline">
+                                             <input type="radio" id="ready" name="status" value="{{ old('status', 1)}}" class="custom-control-input" checked="">
+                                             <label class="custom-control-label" for="ready"> Ha, Kitob maʼlumotlari to‘g‘ri va ko‘rsatish uchun tayyor! (Bu vaziyatda maʼlumotlar saqlanadi va saytda ko‘rinadi!)</label>
+                                          </div>
+                                          <div class="custom-control custom-radio custom-control-inline">
+                                             <input type="radio" id="noReady" name="status" value="{{ old('status', 0)}}" class="custom-control-input">
+                                             <label class="custom-control-label" for="noReady"> Yoq, Kitob maʼlumotlari oxirigacha yetmagan! (Bu vaziyatda maʼlumotlar saqlanadi shunchaki saytda ko‘rinmay turadi!)</label>
+                                          </div>
+                                       </div>
+                                    </div>
                                 </div>
                              </div>
                           </div>

@@ -54,35 +54,59 @@
                   </style>
                 </ul>
              </li>
-             {{-- <li>
-               <a href="#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-               <ul id="ui-elements" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                  <li class="elements">
-                     <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>UI Kit</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                     <ul id="sub-menu" class="iq-submenu collapse" data-parent="#ui-elements">
-                        <li><a href="ui-colors.html"><i class="las la-palette"></i>colors</a></li>
-                        <li><a href="ui-typography.html"><i class="las la-keyboard"></i>Typography</a></li>
-                        <li><a href="ui-alerts.html"><i class="las la-tag"></i>Alerts</a></li>
-                        <li><a href="ui-badges.html"><i class="lab la-atlassian"></i>Badges</a></li>
-                        <li><a href="ui-breadcrumb.html"><i class="las la-bars"></i>Breadcrumb</a></li>
-                        <li><a href="ui-buttons.html"><i class="las la-tablet"></i>Buttons</a></li>
-                        <li><a href="ui-cards.html"><i class="las la-credit-card"></i>Cards</a></li>
-                        <li><a href="ui-carousel.html"><i class="las la-film"></i>Carousel</a></li>
-                        <li><a href="ui-embed-video.html"><i class="las la-video"></i>Video</a></li>
-                        <li><a href="ui-grid.html"><i class="las la-border-all"></i>Grid</a></li>
-                        <li><a href="ui-images.html"><i class="las la-images"></i>Images</a></li>
-                        <li><a href="ui-list-group.html"><i class="las la-list"></i>list Group</a></li>
-                        <li><a href="ui-media-object.html"><i class="las la-ad"></i>Media</a></li>
-                        <li><a href="ui-modal.html"><i class="las la-columns"></i>Modal</a></li>
-                        <li><a href="ui-notifications.html"><i class="las la-bell"></i>Notifications</a></li>
-                        <li><a href="ui-pagination.html"><i class="las la-ellipsis-h"></i>Pagination</a></li>
-                        <li><a href="ui-popovers.html"><i class="las la-eraser"></i>Popovers</a></li>
-                        <li><a href="ui-progressbars.html"><i class="las la-hdd"></i>Progressbars</a></li>
-                        <li><a href="ui-tabs.html"><i class="las la-database"></i>Tabs</a></li>
-                        <li><a href="ui-tooltips.html"><i class="las la-magnet"></i>Tooltips</a></li>
+            <li>
+               <a href="#dashboard" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>ARM Boshqaruv</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+               <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle"> 
+                  <li class="form">
+                     <a href="#forms" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-wpforms"></i><span>ARM Resurslari</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                  
+                     <ul id="forms" class="iq-submenu collapse" data-parent="#dashboard">
+                        <li><a href="#"><i class="ri-book-line"></i>Kitob yaratish</a></li>                        
+                        <li><a href="{{ route('arm-resurslari.index')}}"><i class="las la-book"></i>Kitoblar ro'yxati</a></li>
+                        <li><a href="#"><i class="ri-book-line"></i>Kitob nusxalar ro'yaxati</a></li>
+                        <li><a href="#"><i class="ri-book-line"></i>Maqola yaratish</a></li>    
+                        <li><a href="#"><i class="las la-edit"></i>maqolalar ro'yxati</a></li>                                        
+                        <li><a href="#"><i class="las la-edit"></i>Resurslar bo'limlari</a></li>   
+                        <li><a href="#"><i class="las la-edit"></i>Mualliflar ro'yxati</a></li>   
                      </ul>
                   </li>
-                  <li class="form">
+                  <li>
+                     <a href="#kirobOldiBerdi" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false">
+                        <i class="ri-archive-drawer-line"></i>
+                        <span>ARM Kitob oldi-berdisi</span><i class="ri-arrow-right-s-line iq-arrow-right">
+                        </i>
+                     </a>
+
+                     <ul id="kirobOldiBerdi" class="iq-submenu collapse" data-parent="#dashboard">
+                        <li><a href="form-wizard.html"><i class="ri-clockwise-line"></i>Talabaga kitob berish</a></li>
+                        <li><a href="form-wizard.html"><i class="ri-clockwise-line"></i>Talabalar ro'yxati</a></li>                     
+                        <li><a href="form-wizard.html"><i class="ri-clockwise-line"></i>Talabadan kitob olish</a></li>
+                        <li><a href="form-wizard-validate.html"><i class="ri-clockwise-2-line"></i>ARMdan kitob olganlar</a></li>
+                        <li><a href="form-wizard-vertical.html"><i class="ri-anticlockwise-line"></i>ARMga kitob qaytarganlar</a></li>
+                        <li><a href="form-wizard-vertical.html"><i class="ri-anticlockwise-line"></i>Qaytarish vaqti o'tganlar</a></li>
+                     </ul>
+                  </li>
+
+                  <li>
+                     <a href="#arm-faoliyati" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false">
+                        <i class="ri-archive-drawer-line"></i>
+                        <span>ARM faoliyati</span><i class="ri-arrow-right-s-line iq-arrow-right">
+                        </i>
+                     </a>
+
+                     <ul id="arm-faoliyati" class="iq-submenu collapse" data-parent="#dashboard">
+                        <li><a href="form-wizard.html"><i class="ri-clockwise-line"></i>ARMlar</a></li>
+                        <li><a href="form-wizard.html"><i class="ri-clockwise-line"></i>Hodimlar</a></li>                     
+                        <li><a href="form-wizard.html"><i class="ri-clockwise-line"></i>Talabadan kitob olish</a></li>
+                      
+                     </ul>
+                  </li>
+               </ul>
+
+            </li>
+
+
+                  {{-- s <li class="form">
                      <a href="#forms" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-wpforms"></i><span>Forms</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="forms" class="iq-submenu collapse" data-parent="#ui-elements">
                         <li><a href="form-layout.html"><i class="las la-book"></i>Form Elements</a></li>

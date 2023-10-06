@@ -137,7 +137,18 @@
                                       </tr>
                                       <tr>
                                         <th scope="row">MUALLIF(LAR):</th>
-                                        <td class="text-primary">{{ $book->mualif }}</td>
+                                        <td class="text-primary">
+                                          @if (count($book->authors) == 1 && $book->authors[0]->status == '1')
+                                          <a href="{{route('dashboard.library-author-books', $book->authors[0]->slug)}}">{{$book->authors[0]->fish}}</a>
+                                          @else
+                                                @foreach ($book->authors as $index=>$author)
+                                                   @if ($author->status == '1')
+                                                      <a href="{{ route('dashboard.library-author-books', $author->slug)}}">{{ $author->fish }}</a>@if ($index+1 != count($book->authors)), @endif
+                                                   @endif
+                                                @endforeach
+                                          @endif
+                                      
+                                         </td>
                                       </tr>
                                       <tr>
                                         <th scope="row">KITOB SAHIFASI VA O'LCHAMI:</th>
@@ -157,12 +168,12 @@
                                       </tr>
                                       <tr>
                                         <th scope="row">KITOBGA JAVOBGAR:</th>
-                                        <td>{{ $book->kitobga_javobgar }}</td>
+                                        <td>{{ $book->users->name }}</td>
                                       </tr>
-                                      <tr>
+                                      {{-- <tr>
                                         <th scope="row">MAVZU NOMI:</th>
                                         <td>{{ $book->gmd_name }}</td>
-                                      </tr>
+                                      </tr> --}}
                                       <tr>
                                         <th scope="row">KITOBNING NUSXALAR SONI:</th>
                                         <td>                                          
@@ -235,19 +246,28 @@
                                     </tr>
                                     <tr>
                                       <th scope="row">MUALLIF(LAR):</th>
-                                      <td class="text-primary">{{ $book->mualif }}</td>
+                                      <td class="text-primary">
+                                       @if (count($book->authors) == 1 && $book->authors[0]->status == '1')
+                                       <a href="{{route('dashboard.library-author-books', $book->authors[0]->slug)}}">{{$book->authors[0]->fish}}</a>
+                                       @else
+                                             @foreach ($book->authors as $index=>$author)
+                                                @if ($author->status == '1')
+                                                   <a href="{{ route('dashboard.library-author-books', $author->slug)}}">{{ $author->fish }}</a>@if ($index+1 != count($book->authors)), @endif
+                                                @endif
+                                             @endforeach
+                                       @endif
+                                   
+                                      </td>
                                     </tr>
-                                  
-                                  
                                     <tr>
                                       <th scope="row">KITOB YOZILGAN TIL:</th>
                                       <td><span class="badge badge-pill border border-dark text-dark">{{ $book->yozilgan_tili }} (tilida yozilgan)</span></td>
                                     </tr>
                                    
-                                    <tr>
+                                    {{-- <tr>
                                       <th scope="row">MAVZU NOMI:</th>
                                       <td>{{ $book->gmd_name }}</td>
-                                    </tr>                                  
+                                    </tr>                                   --}}
                                     <tr>
                                       <th scope="row">QAYSI KUTUBXONA:</th>
                                       <td>TVCHDPI ARM fondi</td>

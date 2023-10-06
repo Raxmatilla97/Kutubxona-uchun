@@ -8,6 +8,7 @@ export default {
         // './storage/framework/views/*.php',
         './resources/views/vendor/pagination/*.blade.php',
         './resources/views/auth/*.blade.php',
+        './resources/views/library/dashboard/*.blade.php',
     ],
     options: {
         safelist: [

@@ -46,10 +46,7 @@ class LibraryController extends Controller
             ->where('book_or_article', 'book')
             ->orderByDesc('created_at')
             ->limit(11)
-            ->get();            
-        
-        // Chap tarafdagi menyudagi kitob bo'limlarini chiqaradi
-        $list_category = BookCategory::get();
+            ->get();
 
         // Asosiy sahifadagi kitoblarni ro'yxatini chiqaradi
         $all_books = Book::where('status', 1)
@@ -116,8 +113,7 @@ class LibraryController extends Controller
 
        
 
-        return view('dashboard-index')->with(
-            [   'list_category' => $list_category,
+        return view('dashboard-index')->with(            [  
                 'books_defined' => $books_defined,
                 'all_books' => $all_books,
                 'eng_kop_oqilgan_kitob' => $eng_kop_oqilgan_kitob,
@@ -132,10 +128,6 @@ class LibraryController extends Controller
      */    
     public function booksList()
     {
-        // Chap tarafdagi menyudagi kitob bo'limlarini chiqaradi
-        $list_category = BookCategory::get();
-
-
         // Asosiy sahifadagi kitoblarni ro'yxatini chiqaradi
         $all_books = Book::where('status', 1)           
             ->orderByDesc('created_at')            
@@ -143,7 +135,7 @@ class LibraryController extends Controller
 
         $all_books = $this->imageDeffault($all_books);
      
-        return view('library.books-list', compact('list_category', 'all_books'));
+        return view('library.books-list', compact('all_books'));
     }
 
     /**
@@ -192,61 +184,54 @@ class LibraryController extends Controller
 
         $all_books = $query->paginate(28);
 
-        $all_books = $this->imageDeffault($all_books);
+        $all_books = $this->imageDeffault($all_books);     
 
-        $list_category = BookCategory::get();
-
-        return view('library.books-list', compact('list_category', 'all_books'));
+        return view('library.books-list', compact('all_books'));
     }
 
     /**
      * Faqat Kitoblarni ko'rish uchun mo'ljallangan funksiya
      */ 
     public function libraryBooks()
-    {
-        $list_category = BookCategory::get();
+    {      
         $all_books = Book::where('book_or_article', 'book')->paginate(28);
         
         $all_books = $this->imageDeffault($all_books);  
 
-        return view('library.books-list', compact('list_category', 'all_books'));
+        return view('library.books-list', compact('all_books'));
     }
 
     /**
      * Faqat Maqolalarni ko'rish uchun mo'ljallangan funksiya
      */
     public function libraryArticles()
-    {
-        $list_category = BookCategory::get();
+    {       
         $all_books = Book::where('book_or_article', 'article')->paginate(28);
         
         $all_books = $this->imageDeffault($all_books); 
 
-        return view('library.books-list', compact('list_category', 'all_books'));
+        return view('library.books-list', compact('all_books'));
     }
 
     /**
      * Kutubxona bo'limlarini chiqaradigan funksiya
      */
     public function libraryBooksCategory($slug)
-    {     
-        $list_category = BookCategory::get();
-
+    {           
         $all_books = Book::where('status', 1)->whereHas('BookCategory', function ($query) use ($slug) {
             $query->where('slug', $slug);
         })->paginate(28);
 
         $all_books = $this->imageDeffault($all_books);
 
-        return view('library.books-list', compact('list_category', 'all_books'));
+        return view('library.books-list', compact('all_books'));
     }
 
     /**
      * Resursni sahifasi unda shu resurs haqida ma'lumotlar beriladi
      */
     public function libraryBookDetal($slug)
-    {       
-        $list_category = BookCategory::get();
+    {             
         $book = Book::where('slug', $slug)->first();
 
         // Kitobning surati bo'lmasa, uchun default surat birlashtiramiz.
@@ -309,7 +294,7 @@ class LibraryController extends Controller
 
             $oxshashResurslar = $this->imageDeffault($oxshashResurslar);  
        
-        return view('library.book-detal', compact('list_category', 'book', 'bookCopies', 'result_count', 'oxshashResurslar'));
+        return view('library.book-detal', compact('book', 'bookCopies', 'result_count', 'oxshashResurslar'));
     }
 
     /**
@@ -334,8 +319,7 @@ class LibraryController extends Controller
     }
 
     public function libraryAuthors()
-    {
-        $list_category = BookCategory::get();
+    {    
         $list_authors = Author::orderBy('created_at', 'desc')->paginate('25');
         
         foreach ($list_authors as $author) {  
@@ -344,12 +328,11 @@ class LibraryController extends Controller
             }            
         }   
 
-        return view('library.contents.authors-list', compact('list_category', 'list_authors'));
+        return view('library.contents.authors-list', compact('list_authors'));
     }
     
     public function libraryAuthorBooks($request)
-    {      
-        $list_category = BookCategory::get();       
+    {            
         $author = Author::where('status', '1')->where('slug', $request)->first();
            
         if ($author) {
@@ -360,7 +343,7 @@ class LibraryController extends Controller
         $message_header = "Mualifga tegishli barcha resurslar ro'yxati";
         $all_books = $this->imageDeffault($all_books);
 
-        return view('library.books-list', compact('list_category', 'all_books', 'message_header', 'author'));
+        return view('library.books-list', compact('all_books', 'message_header', 'author'));
     }
 
     /**

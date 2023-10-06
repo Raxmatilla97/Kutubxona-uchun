@@ -12,7 +12,7 @@
       @else
          @vite(['resources/css/app.css', 'resources/js/app.js'])
       @endif
-     
+      @stack('styles')
       @include('library.assets.header')
    </head>
    <body>
@@ -27,5 +27,6 @@
         @include('library.footer')
         <!-- color-customizer END -->        
         @include('library.assets.js')
+        @stack('scripts')
    </body>
 </html>

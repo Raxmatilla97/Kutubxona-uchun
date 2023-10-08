@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->nullable();
-            $table->string('image')->nullable();
-            $table->string('pdf')->nullable();
+            $table->text('image')->nullable();
+            $table->text('pdf')->nullable();
             $table->string('book_inventar_number')->nullable();
             $table->string('book_or_article')->nullable();
             $table->string('nashriyot_nomi')->nullable();

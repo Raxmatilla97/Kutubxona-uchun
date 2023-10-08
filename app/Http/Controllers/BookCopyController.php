@@ -12,7 +12,11 @@ class BookCopyController extends Controller
      */
     public function index()
     {
-        //
+        $book_copy = BookCopy::orderBy('created_at', 'desc')->paginate(25);
+
+        return view('library.dashboard.book-copies-list', compact(
+            'book_copy'           
+        ));
     }
 
     /**

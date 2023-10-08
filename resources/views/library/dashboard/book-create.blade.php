@@ -186,17 +186,17 @@
                                 </a>
                              </div>
                              <div id="document" class="wizard-step">
-                                <a href="#document-detail" class="btn btn-default disabled  active">
+                                <a href="#document-detail" class="btn btn-default @if($errors->isEmpty()) disabled @endif  active">
                                 <i class="ri-bookmark-fill text-danger"></i><span>ARM ma'lumotlari</span>
                                 </a>
                              </div>
                              <div id="confirm" class="wizard-step">
-                                <a href="#bank-detail" class="btn btn-default disabled  active">
+                                <a href="#bank-detail" class="btn btn-default @if($errors->isEmpty()) disabled @endif active">
                                 <i class="ri-camera-fill text-warning"></i><span>Fayl yuklash</span>
                                 </a>
                              </div>
                              <div id="bank" class="wizard-step">
-                                <a href="#cpnfirm-data" class="btn btn-default   active">
+                                <a href="#cpnfirm-data" class="btn btn-default @if($errors->isEmpty()) disabled @endif  active">
                                 <i class="ri-check-fill text-success"></i><span>Tugatish</span>
                                 </a>
                              </div>
@@ -230,11 +230,11 @@
                                    <div class="row">
                                       <div class="form-group col-md-6">
                                          <label for="title" class="control-label">Kitobning nomini yozing: <b class="text-red-600">*</b></label>
-                                         <input maxlength="100" type="text" id="title" name="title" required="required" class="form-control" placeholder="O'tgan kunlar...">
+                                         <input maxlength="100" type="text" id="title" name="title"  value="{{ old('title')}}" required="required" class="form-control" placeholder="O'tgan kunlar...">
                                       </div>
                                       <div class="form-group col-md-6">
                                          <label for="book_inventar_number"  class="control-label">Kitob inventar raqami: <b class="text-red-600">*</b></label>
-                                         <input maxlength="100" type="text" id="book_inventar_number" required="required" name="book_inventar_number" class="form-control" placeholder="12345">
+                                         <input maxlength="100" type="text" id="book_inventar_number"  value="{{ old('book_inventar_number')}}" required="required" name="book_inventar_number" class="form-control" placeholder="12345">
                                       </div>
                                      
                                       <div class="col-md-6 form-group">
@@ -280,9 +280,9 @@
                                     <div class="form-group col-sm-6">
                                         <label for="users">Resursga javobgar: <b class="text-red-600">*</b></label>
                                         <select class="form-control" name="kitobga_javobgar_id" id="users" required>
-                                           <option selected="">Tanlang</option>
+                                           <option selected="" value="">Tanlang</option>
                                            @foreach($users as $user)
-                                            <option value="{{$user->id}}" {{ old('kitobga_javobgar_id') === $user->id ? 'selected' : '' }}>{{$user->name}}</option>
+                                           <option value="{{$user->id}}" {{ (int)old('kitobga_javobgar_id') === $user->id ? 'selected' : '' }}>{{$user->name}}</option>
                                            @endforeach 
                                         </select>
                                      </div>
@@ -290,9 +290,9 @@
                                      <div class="form-group col-sm-6">
                                         <label for="category">Resurs bo'limini tanlang: <b class="text-red-600">*</b></label>
                                         <select class="form-control" name="book_category_id" id="category" required>
-                                           <option selected="">Tanlang</option>
+                                           <option selected="" value="">Tanlang</option>
                                            @foreach($categores as $category)
-                                            <option value="{{$category->id}}" {{ old('book_category_id') === $category->id ? 'selected' : '' }}>{{$category->title}}</option>
+                                            <option value="{{$category->id}}" {{ (int)old('book_category_id') === $category->id ? 'selected' : '' }}>{{$category->title}}</option>
                                            @endforeach 
                                         </select>
                                      </div>                                
@@ -494,17 +494,26 @@
                                     </div>
                                 <!-- Hata mesajlarını göstermek için -->
                                  @if ($errors->any())
-                                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-50 m-auto" role="alert">
-                                     <div class="iq-alert-icon">
-                                             <i class="ri-alert-line"></i>
-                                          </div>
-                                    <ul>
-                                       @foreach ($errors->all() as $error)
-                                             <li>{{ $error }}</li>
-                                       @endforeach
-                                    </ul>
+                                 <div class="alert text-white  w-50 m-auto" style="background-color: #e2634d" role="alert">
+                                    <div class="iq-alert-icon">
+                                       <i class="ri-information-line"></i>
+                                    </div>
+                                    <div class="iq-alert-text">
+                                       <h4 class="text-center text-lg mb-2 mt2 text-white">Muommolarni hal qilib qayta urunib ko'ring!</h4>
+                                       <ol>
+                                          @php
+                                             $i = 1;
+                                          @endphp
+                                          @foreach ($errors->all() as $error)
+                                                <li>{{$i++}} - {{ $error }}</li>
+                                          @endforeach                                          
+                                       </ol>
+                                    </div>
                                  </div>
                                  @endif
+
+                                 
+
                                    <div class="row justify-content-center">                                    
                                       <div class="col-8 mt-5 mb-4"> <img src="{{asset('assets/images/confirm.gif')}}" class="fit-image" alt="img-success"> </div>
                                    </div>
@@ -512,11 +521,11 @@
                                        <div class="form-group col-sm-12 " style="font-size: 18px;">
                                           <label class="d-block">Kitob saytda ko'rsatish uchun tayyormi?:</label>
                                           <div class="custom-control custom-radio custom-control-inline">
-                                             <input type="radio" id="ready" name="status" value="{{ old('status', 1)}}" class="custom-control-input" checked="">
+                                             <input type="radio" id="ready" name="status" value="1" class="custom-control-input"  {{ (int)old('status') === 1 ? 'checked' : '' }}>
                                              <label class="custom-control-label" for="ready"> Ha, Kitob maʼlumotlari to‘g‘ri va ko‘rsatish uchun tayyor! (Bu vaziyatda maʼlumotlar saqlanadi va saytda ko‘rinadi!)</label>
                                           </div>
                                           <div class="custom-control custom-radio custom-control-inline">
-                                             <input type="radio" id="noReady" name="status" value="{{ old('status', 0)}}" class="custom-control-input">
+                                             <input type="radio" id="noReady" name="status" value="0" {{ (int)old('status') === 0 ? 'checked' : '' }} class="custom-control-input">
                                              <label class="custom-control-label" for="noReady"> Yoq, Kitob maʼlumotlari oxirigacha yetmagan! (Bu vaziyatda maʼlumotlar saqlanadi shunchaki saytda ko‘rinmay turadi!)</label>
                                           </div>
                                           <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Resurs yaratish</button>

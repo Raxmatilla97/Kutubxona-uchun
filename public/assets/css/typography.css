@@ -247,7 +247,7 @@ Background Color
 ------------------------------------------------*/
 .bg-primary, .badge-primary { color: var(--iq-white); background: var(--iq-primary) !important; }
 .bg-secondary, .badge-secondary { color: var(--iq-white); background-color: var(--iq-secondary) !important; }
-.bg-success, .badge-success { color: var(--iq-white); background: var(--iq-success) !important; }
+.bg-success, .badge-success { color: var(--iq-white); background: #21baa3 !important; }
 .bg-danger, .badge-danger { color: var(--iq-white); background: var(--iq-danger) !important; }
 .bg-warning, .badge-warning { color: var(--iq-white); background: var(--iq-warning) !important; }
 .bg-info, .badge-info { color: var(--iq-white); background: var(--iq-info) !important; }

@@ -202,9 +202,12 @@
                              </div>
                           </div>
                        </div>
-                       <form class="form" action="{{ route('dashboard.arm-resurslari.update', $book->id )}}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                      
+
+                       <form class="form" action="{{ route('dashboard.arm-resurslari.update', ['arm_resurslari' => $book->id ])}}" method="POST" autocomplete="off" enctype="multipart/form-data">
                         @csrf 
-                        @method('post')   
+                        @method('PUT')   
+                        {{-- <input type="hidden" name="id" value="{{$book->id}}"> --}}
                           <div class="row setup-content" id="user-detail" style="display: flex;">
                              <div class="col-sm-12">
                                 <div class="col-md-12 p-0">
@@ -286,7 +289,7 @@
                                     <div class="form-group col-sm-6">
                                         <label for="users">Resursga javobgar: <b class="text-red-600">*</b></label>
                                         <select class="form-control" name="kitobga_javobgar_id" id="users" required>
-                                           <option selected="">Tanlang</option>
+                                           <option selected="" value="">Tanlang</option>
                                            @foreach($users as $user)
                                             <option value="{{$user->id}}" {{ old('kitobga_javobgar_id', $book->kitobga_javobgar_id ) === $user->id ? 'selected' : '' }}>{{$user->name}}</option>
                                            @endforeach 
@@ -296,7 +299,7 @@
                                      <div class="form-group col-sm-6">
                                         <label for="category">Resurs bo'limini tanlang: <b class="text-red-600">*</b></label>
                                         <select class="form-control" name="book_category_id" id="category" required>
-                                           <option selected="">Tanlang</option>
+                                           <option selected="" value="">Tanlang</option>
                                            @foreach($categores as $category)
                                             <option value="{{$category->id}}" {{ old('book_category_id', $book->book_category_id) === $category->id ? 'selected' : '' }}>{{$category->title}}</option>
                                            @endforeach 
@@ -305,8 +308,13 @@
                                         <div class="col-md-12 form-group">
                                          <div class="form-group">
                                             <label for="tags" class="control-label">Resurs mazmunidan kelib chiqib unga mos kalit so‘zlarni tanlang: <b class="text-red-600">*</b></label>
-                                           
-                                            <input type="tags" value='{{ old('tags',implode(', ', array_map('strtolower', $book->tagNames()))) }}'  class="w-full px-4 py-6 text-md border border-gray-300 rounded outline-none" required="required" id="tags" name="tags" >
+                                            @php
+                                                $tags = implode(', ', array_map(function($tag) {
+                                                return str_replace(']', '', strtolower($tag));
+                                            }, $book->tagNames())).']';
+                                            @endphp
+                                          
+                                            <input type="text" value='{{ old('tags', $tags ) }}'  class="w-full px-4 py-6 text-md border border-gray-300 rounded outline-none" required="required" id="tags" name="tags" >
                                          </div>
                                       </div>
                                       <div class="col-md-12 form-group">
@@ -330,7 +338,7 @@
                                    <div class="form-row flex justify-between">
 
                                     <div class="col-md-6 mb-3">
-                                       <input type="file" class="custom-file-input" name="image" id="image" value="{{old('image')}}" accept="image/*" required="">
+                                       <input type="file" class="custom-file-input" name="image" id="image" value="{{old('image')}}" accept="image/*">
                                        <label class="custom-file-label" for="image">Resurs muqova suratini yuklang...</label>
                                        <div class="invalid-feedback">Surat yuklanishi kerak</div>                                       
 
@@ -427,7 +435,7 @@
                                              <label for="document" class=" w-full h-57 border-2 @if($errors->has('pdf')) border-red-300 border-dashed rounded-lg cursor-pointer bg-red-50  hover:bg-red-100  @else border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800  hover:bg-gray-100  @endif ">
                                                 
                                    
-                                               <input type="file" class="text-md" value="{{ old('pdf')}}" required="required" name="pdf"  data-max-file-size="5MB" />
+                                               <input type="file" class="text-md" value="{{ old('pdf')}}" name="pdf"  data-max-file-size="5MB" />
                                                 
                                              </label> 
                                              @if($book->pdf)
@@ -533,28 +541,55 @@
                                            <div class="iq-alert-text">Kitob ma'lumotlarini tahrirlashingiz mumkin!</div>
                                         </div>
                                      </div>
+
+                                     <div class="w-50 m-auto">
+                                        @if(session('message'))                                      
+                                        <div class="alert bg-success text-white" role="alert">
+                                            <div class="iq-alert-icon">
+                                               <i class="ri-alert-line"></i>
+                                            </div>
+                                            <div class="iq-alert-text"><b>{{ session('message') }}</b></div>
+                                         </div>
+                                        @endif
+                                    </div>
+
+                                    @if ($errors->any())
+                                    <div class="alert text-white  w-50 m-auto" style="background-color: #e2634d" role="alert">
+                                       <div class="iq-alert-icon">
+                                          <i class="ri-information-line"></i>
+                                       </div>
+                                       <div class="iq-alert-text">
+                                          <h4 class="text-center text-lg mb-2 mt2 text-white">Muommolarni hal qilib qayta urunib ko'ring!</h4>
+                                          <ol>
+                                             @php
+                                                $i = 1;
+                                             @endphp
+                                             @foreach ($errors->all() as $error)
+                                                   <li>{{$i++}} - {{ $error }}</li>
+                                             @endforeach                                          
+                                          </ol>
+                                       </div>
+                                    </div>
+                                    @endif
+
                                      <div class="row justify-content-center mb-5">                                    
                                         <div class="col-5"> <img src="{{ asset('assets/images/editors.gif')}}" class="fit-image" alt="img-success"> </div>
                                      </div>
-                                     @endif
-                                    @if(session('message'))
-                                       <div class="bg-green-500 text-white p-4 mb-4">
-                                          {{ session('message') }}
-                                       </div>
-                                    @endif
+                                     
+                                     @endif                                  
                                   
                                    <div class="m-auto" style="width: 900px;">
                                        <div class="form-group col-sm-12 " style="font-size: 18px;">
                                           <label class="d-block">Kitob saytda ko'rsatish uchun tayyormi?:</label>
                                           <div class="custom-control custom-radio custom-control-inline">
-                                             <input type="radio" id="ready" name="status" value="{{ old('status', 1)}}" class="custom-control-input" checked="">
+                                             <input type="radio" id="ready" name="status" value="1" class="custom-control-input" {{ $book->status === 1 ? 'checked' : '' }}>
                                              <label class="custom-control-label" for="ready"> Ha, Kitob maʼlumotlari to‘g‘ri va ko‘rsatish uchun tayyor! (Bu vaziyatda maʼlumotlar saqlanadi va saytda ko‘rinadi!)</label>
                                           </div>
                                           <div class="custom-control custom-radio custom-control-inline">
-                                             <input type="radio" id="noReady" name="status" value="{{ old('status', 0)}}" class="custom-control-input">
+                                             <input type="radio" id="noReady" name="status" value="0" {{ $book->status === 0 ? 'checked' : '' }} class="custom-control-input">
                                              <label class="custom-control-label" for="noReady"> Yoq, Kitob maʼlumotlari oxirigacha yetmagan! (Bu vaziyatda maʼlumotlar saqlanadi shunchaki saytda ko‘rinmay turadi!)</label>
                                           </div>
-                                          <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Resurs yaratish</button>
+                                          <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Resursni yangilash</button>
                                        </div>
                                     </div>
                                  </div>

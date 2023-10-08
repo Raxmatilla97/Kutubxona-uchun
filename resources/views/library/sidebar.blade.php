@@ -64,7 +64,8 @@
              @php
              $isActiveDashboardRoute = request()->routeIs([
                  'dashboard.arm-resurslari.index',
-                 'dashboard.arm-resurslari.create' 
+                 'dashboard.arm-resurslari.create',
+                 'dashboard.kitob-nusxalari.index'
              ]);
             @endphp
             <style>
@@ -81,8 +82,8 @@
                      <ul id="forms" class="iq-submenu collapse  @if($isActiveDashboardRoute) show @endif" data-parent="#dashboard">
                         <li><a class="@if(request()->routeIs('dashboard.arm-resurslari.create')) active-menu2 @endif "href="{{ route('dashboard.arm-resurslari.create')}}"><i class="ri-book-line"></i>Kitob yaratish</a></li>                        
                         <li><a class="@if(request()->routeIs('dashboard.arm-resurslari.index')) active-menu2 @endif" href="{{ route('dashboard.arm-resurslari.index')}}"><i class="las la-book"></i>Kitoblar ro'yxati</a></li>
-                        <li><a href="#"><i class="ri-book-line"></i>Kitob nusxalar ro'yaxati</a></li>
-                        <li><a href="#"><i class="ri-book-line"></i>Maqola yaratish</a></li>    
+                        <li><a class="@if(request()->routeIs('dashboard.kitob-nusxalari.index')) active-menu2 @endif" href="{{ route('dashboard.kitob-nusxalari.index')}}"><i class="ri-book-line"></i>Kitob nusxalar ro'yaxati</a></li>
+                        <li><a  href="#"><i class="ri-book-line"></i>Maqola yaratish</a></li>    
                         <li><a href="#"><i class="las la-edit"></i>maqolalar ro'yxati</a></li>                                        
                         <li><a href="#"><i class="las la-edit"></i>Resurslar bo'limlari</a></li>   
                         <li><a href="#"><i class="las la-edit"></i>Mualliflar ro'yxati</a></li>   

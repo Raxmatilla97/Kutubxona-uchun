@@ -31,20 +31,28 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('library')->group(function () {
          // Search qismlari
-    Route::get('/', [LibraryController::class, 'index'])->name('dashboard.index');
-    Route::match(['get', 'post'],'/library/resurs-search', [LibraryController::class, 'booksSearch'])->name('dashboard.resurs-search');
+    Route::get('/', [LibraryController::class, 'index'])->name('library.index');
+    Route::match(['get', 'post'],'/library/resurs-search', [LibraryController::class, 'booksSearch'])->name('library.resurs-search');
     Route::get('/get-authors', [LibraryController::class, 'getAuthors']);
-    Route::get('/resurs', [LibraryController::class, 'booksList'])->name('dashboard.resurs-list');        
-    Route::get('/books', [LibraryController::class, 'libraryBooks'])->name('dashboard.library-books');
-    Route::get('/articles', [LibraryController::class, 'libraryArticles'])->name('dashboard.library-articles');
-    Route::get('/books/{category}', [LibraryController::class, 'libraryBooksCategory'])->name('dashboard.library-books-category');
-    Route::get('/book/{slug}', [LibraryController::class, 'libraryBookDetal'])->name('dashboard.library-book-detal');
-    Route::get('/authors', [LibraryController::class, 'libraryAuthors'])->name('dashboard.library-authors');
-    Route::post('/author', [AuthorController::class, 'store'])->name('dashboard.library-author-store');
-    Route::get('/author-books/{slug}', [LibraryController::class, 'libraryAuthorBooks'])->name('dashboard.library-author-books');
+    Route::get('/resurs', [LibraryController::class, 'booksList'])->name('library.resurs-list');        
+    Route::get('/books', [LibraryController::class, 'libraryBooks'])->name('library.library-books');
+    Route::get('/articles', [LibraryController::class, 'libraryArticles'])->name('library.library-articles');
+    Route::get('/books/{category}', [LibraryController::class, 'libraryBooksCategory'])->name('library.library-books-category');
+    Route::get('/book/{slug}', [LibraryController::class, 'libraryBookDetal'])->name('library.library-book-detal');
+    Route::get('/authors', [LibraryController::class, 'libraryAuthors'])->name('library.library-authors');
+    Route::post('/author', [AuthorController::class, 'store'])->name('library.library-author-store');
+    Route::get('/author-books/{slug}', [LibraryController::class, 'libraryAuthorBooks'])->name('library..library-author-books');
 
 
-    Route::resource('arm-resurslari', BooksController::class);
+    Route::resource('arm-resurslari', BooksController::class)->names([
+        'index' => 'dashboard.arm-resurslari.index',
+        'create' => 'dashboard.arm-resurslari.create',
+        'store' => 'dashboard.arm-resurslari.store',
+        'show' => 'dashboard.arm-resurslari.show',
+        'edit' => 'dashboard.arm-resurslari.edit',
+        'update' => 'dashboard.arm-resurslari.update',
+        'destroy' => 'dashboard.arm-resurslari.destroy',
+    ]);;
     Route::post('arm-resurslari/media', [BooksController::class, 'storeMedia'])->name('dashboard.storeMedia');
 
     });

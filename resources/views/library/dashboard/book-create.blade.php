@@ -186,23 +186,23 @@
                                 </a>
                              </div>
                              <div id="document" class="wizard-step">
-                                <a href="#document-detail" class="btn btn-default  active">
+                                <a href="#document-detail" class="btn btn-default disabled  active">
                                 <i class="ri-bookmark-fill text-danger"></i><span>ARM ma'lumotlari</span>
                                 </a>
                              </div>
                              <div id="confirm" class="wizard-step">
-                                <a href="#bank-detail" class="btn btn-default  active">
+                                <a href="#bank-detail" class="btn btn-default disabled  active">
                                 <i class="ri-camera-fill text-warning"></i><span>Fayl yuklash</span>
                                 </a>
                              </div>
                              <div id="bank" class="wizard-step">
-                                <a href="#cpnfirm-data" class="btn btn-default  active">
+                                <a href="#cpnfirm-data" class="btn btn-default   active">
                                 <i class="ri-check-fill text-success"></i><span>Tugatish</span>
                                 </a>
                              </div>
                           </div>
                        </div>
-                       <form class="form" action="{{ route('arm-resurslari.store')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                       <form class="form" action="{{ route('dashboard.arm-resurslari.store')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
                         @csrf 
                         @method('post')   
                           <div class="row setup-content" id="user-detail" style="display: flex;">
@@ -323,7 +323,7 @@
                                    <div class="form-row flex justify-between">
 
                                     <div class="col-md-6 mb-3">
-                                       <input type="file" class="custom-file-input" name="image" id="image" value="{{old('image')}}" accept="image/*" required="">
+                                       <input type="file" class="custom-file-input" name="image" id="image" value="{{old('image')}}" accept="image/*">
                                        <label class="custom-file-label" for="image">Resurs muqova suratini yuklang...</label>
                                        <div class="invalid-feedback">Surat yuklanishi kerak</div>                                       
 
@@ -420,7 +420,7 @@
                                              <label for="document" class=" w-full h-57 border-2 @if($errors->has('pdf')) border-red-300 border-dashed rounded-lg cursor-pointer bg-red-50  hover:bg-red-100  @else border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800  hover:bg-gray-100  @endif ">
                                                 
                                    
-                                               <input type="file" class="text-md" value="{{ old('pdf')}}" required="required" name="pdf"  data-max-file-size="5MB" />
+                                               <input type="file" class="text-md" value="{{ old('pdf')}}" name="pdf"  data-max-file-size="5MB" />
                                                 
                                              </label>           
                                          </div>  
@@ -492,13 +492,21 @@
                                           <div class="iq-alert-text">Ma'lumotlarda xato bo'lmasligi uchun yana bir-bor <b>tekshirib</b> oling!</div>
                                        </div>
                                     </div>
-                                    @if(session('message'))
-                                       <div class="bg-green-500 text-white p-4 mb-4">
-                                          {{ session('message') }}
-                                       </div>
-                                    @endif
+                                <!-- Hata mesajlarını göstermek için -->
+                                 @if ($errors->any())
+                                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-50 m-auto" role="alert">
+                                     <div class="iq-alert-icon">
+                                             <i class="ri-alert-line"></i>
+                                          </div>
+                                    <ul>
+                                       @foreach ($errors->all() as $error)
+                                             <li>{{ $error }}</li>
+                                       @endforeach
+                                    </ul>
+                                 </div>
+                                 @endif
                                    <div class="row justify-content-center">                                    
-                                      <div class="col-3"> <img src="https://cdn.dribbble.com/users/1751799/screenshots/5512482/check02.gif" class="fit-image" alt="img-success"> </div>
+                                      <div class="col-8 mt-5 mb-4"> <img src="{{asset('assets/images/confirm.gif')}}" class="fit-image" alt="img-success"> </div>
                                    </div>
                                    <div class="m-auto" style="width: 900px;">
                                        <div class="form-group col-sm-12 " style="font-size: 18px;">

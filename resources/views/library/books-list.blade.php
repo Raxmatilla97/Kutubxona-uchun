@@ -16,7 +16,7 @@
         <div class="container-fluid">
            <div class="row">
                 <div class="col-lg-12">                    
-                    <form action="{{ route('dashboard.resurs-search') }}" method="POST">
+                    <form action="{{ route('library.resurs-search') }}" method="POST">
                         @csrf
                         @method('POST')
                         <style>
@@ -119,10 +119,10 @@
                                 <div class="iq-card iq-card-block iq-card-stretch iq-card-height browse-bookcontent">
                                     <div class="iq-card-body p-0">
                                         <div class="d-flex align-items-center">
-                                            <div class="col-6 p-0 position-relative image-overlap-shadow">
-                                                <a href="{{ route('dashboard.library-book-detal', $item->slug )}}"><img class="img-fluid rounded w-100" src="{{ $item->image }}" alt=""></a>
+                                            <div class="col-6 p-0 position-relative image-overlap-shadow">                                             
+                                                <a href="{{ route('library.library-book-detal', $item->slug ?? null )}}"><img class="img-fluid rounded w-100" src="{{ $item->image }}" alt=""></a>
                                                 <div class="view-book">
-                                                <a href="{{ route('dashboard.library-book-detal', $item->slug )}}" class="btn btn-sm btn-white">
+                                                <a href="{{ route('library.library-book-detal', $item->slug ?? null)}}" class="btn btn-sm btn-white">
                                                     @if ($item->book_or_article == 'book')
                                                         Kitobni ko'rish
                                                     @else

@@ -5,7 +5,7 @@
              <h4 class="card-title mb-0">Kutubxona adabiyotlari</h4>
           </div>
           <div class="iq-card-header-toolbar d-flex align-items-center">                              
-             <a href="{{ route('dashboard.library-books')}}" class="btn btn-sm btn-primary view-more">Barchasini ko'rish</a>
+             <a href="{{ route('library.library-books')}}" class="btn btn-sm btn-primary view-more">Barchasini ko'rish</a>
           </div>
        </div> 
        <div class="iq-card-body">  
@@ -16,9 +16,9 @@
                     <div class="iq-card-body p-0">
                         <div class="d-flex align-items-center">
                             <div class="col-6 p-0 position-relative image-overlap-shadow">
-                                <a href="{{ route('dashboard.library-book-detal', $item->slug )}}"><img class="img-fluid rounded w-100" src="{{ asset('assets/images/book-test.webp')}}" alt=""></a>
+                                <a href="{{ route('library.library-book-detal', $item->slug )}}"><img class="img-fluid rounded w-100" src="{{ asset('assets/images/book-test.webp')}}" alt=""></a>
                                 <div class="view-book">
-                                <a href="{{ route('dashboard.library-book-detal', $item->slug )}}" class="btn btn-sm btn-white">Kitobni ko'rish</a>
+                                <a href="{{ route('library.library-book-detal', $item->slug )}}" class="btn btn-sm btn-white">Kitobni ko'rish</a>
                                 </div>
                             </div>
                             <div class="col-6" >

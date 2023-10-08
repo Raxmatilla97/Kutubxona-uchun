@@ -27,7 +27,7 @@
             </div>          
           @endpush
           <div class="iq-search-bar">             
-               <form action="{{ route('dashboard.resurs-search') }}" method="POST"  class="searchbox">
+               <form action="{{ route('library.resurs-search') }}" method="POST"  class="searchbox">
                   @csrf
                   @method('POST')
                <input type="text" name="text" value="{{ request('text') ? request('text') : '' }}" class="text search-input" placeholder="Bu yerdan qidiring...">
@@ -43,7 +43,7 @@
                    <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
                       <i class="ri-search-line"></i>
                    </a>                   
-                     <form action="{{ route('dashboard.resurs-search') }}" method="POST" class="search-box p-0">
+                     <form action="{{ route('library.resurs-search') }}" method="POST" class="search-box p-0">
                         @csrf
                         @method('POST')
                       <input type="text" name="text" value="{{ request('text') ? request('text') : '' }}" class="text search-input" placeholder="Qidirish uchun bu yerga yozing...">

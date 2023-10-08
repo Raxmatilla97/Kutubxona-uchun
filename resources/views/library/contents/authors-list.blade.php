@@ -61,7 +61,7 @@
                                  </div>
                                 
                                  <div class="modal-body">     
-                                    <form action="{{ route('dashboard.library-author-store')}}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('library.library-author-store')}}" method="POST" enctype="multipart/form-data">
                                        @csrf
                                        @method('POST')                         
                                        <div class="form-group">

@@ -174,7 +174,7 @@
                  <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between">
                        <div class="iq-header-title">
-                          <h4 class="card-title">Kitob ma'lumotlarini tahrirlash sahifasi: <b class="text-blue-600">{{$book->title}}</b></h4>
+                          <h5 class="card-title">Kitob ma'lumotlarini tahrirlash sahifasi: ID:{{$book->id}} - <b class="text-blue-600">{{$book->title}}</b></h5>
                        </div>
                     </div>
                     <div class="iq-card-body">
@@ -202,7 +202,7 @@
                              </div>
                           </div>
                        </div>
-                       <form class="form" action="{{ route('arm-resurslari.update', $book->id )}}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                       <form class="form" action="{{ route('dashboard.arm-resurslari.update', $book->id )}}" method="POST" autocomplete="off" enctype="multipart/form-data">
                         @csrf 
                         @method('post')   
                           <div class="row setup-content" id="user-detail" style="display: flex;">
@@ -430,14 +430,25 @@
                                                <input type="file" class="text-md" value="{{ old('pdf')}}" required="required" name="pdf"  data-max-file-size="5MB" />
                                                 
                                              </label> 
+                                             @if($book->pdf)
                                              <div class="relative text-center hidden ml-4 mr-4 md:block" style="width: 400px;">
-                                                <h4 class="shadow-sm relative rounded-md text-md border border-gray-200 rounded-t-lg font-medium px-1 py-3 right-2 ">Faylni yuklab olish
-                                                 
-                                                        <a target="_blank" href="{{'/storage/uploads/'}}{{$book->pdf}}"><img id="myImg" src="{{ asset('assets/images/download.png')}}" alt=""></a>
+                                                <h4 class="shadow-sm relative rounded-md text-md border border-gray-200 rounded-t-lg font-medium px-1 py-3 right-2 ">
+                                                    Faylni yuklab olish                                                 
+                                                    <a target="_blank" href="{{'/storage/uploads/'}}{{$book->pdf}}">
+                                                        <img id="myImg" src="{{ asset('assets/images/download.gif')}}" alt="">
+                                                    </a>
                                                   
                                                 </h4>        
                                             </div>
-                                        
+                                             @else
+                                             <div class="relative text-center hidden ml-4 mr-4 md:block" style="width: 400px;">
+                                                <h4 class="shadow-sm relative rounded-md text-md border border-gray-200 rounded-t-lg font-medium px-1 py-3 right-2 ">
+                                                    Fayl mavjud emas! 
+                                                        <img id="myImg" src="{{ asset('assets/images/not_found.gif')}}" alt="">
+                                                </h4>        
+                                            </div>
+                                             @endif
+                                             
                                                      
                                          </div>  
                                        </div>
@@ -499,23 +510,39 @@
                              <div class="col-sm-12">
                                 <div class="col-md-12 p-0">
                                    <h3 class="mb-4 text-left">Jarayonni tugatish qismi:</h3>
-
-                                   <div class="w-50 m-auto">
-                                       <div class="alert bg-white alert-primary" role="alert">
-                                          <div class="iq-alert-icon">
-                                             <i class="ri-alert-line"></i>
-                                          </div>
-                                          <div class="iq-alert-text">Ma'lumotlarda xato bo'lmasligi uchun yana bir-bor <b>tekshirib</b> oling!</div>
-                                       </div>
+                                   
+                                     @if (session('success'))      
+                                     <div class="alert text-white m-auto" role="alert" style="width: 700px; background-color: #0dd6b8;">
+                                        <div class="iq-alert-icon">
+                                            <i class="ri-alert-line"></i>
+                                        </div>
+                                        <div class="iq-alert-text"><p class="text-md" style="margin-bottom: 0.5rem; font-size: 22px;">Siz yaratgan kitob muvaffaqiyatli kutubxonaga joylandi</p>
+                                            <p class="text-center">Kitobni tahrirlab ma'lumotlarini yangilashingiz mumkin!</p>                 
+                                        </div> 
+                                                                  
                                     </div>
+                                     <div class="row justify-content-center">                                    
+                                        <div class="col-5"> <img src="{{ asset('assets/images/successfuly.gif')}}" class="fit-image" alt="img-success"> </div>
+                                     </div>
+                                     @else
+                                     <div class="w-50 m-auto">
+                                        <div class="alert bg-white alert-primary" role="alert">
+                                           <div class="iq-alert-icon">
+                                              <i class="ri-alert-line"></i>
+                                           </div>
+                                           <div class="iq-alert-text">Kitob ma'lumotlarini tahrirlashingiz mumkin!</div>
+                                        </div>
+                                     </div>
+                                     <div class="row justify-content-center mb-5">                                    
+                                        <div class="col-5"> <img src="{{ asset('assets/images/editors.gif')}}" class="fit-image" alt="img-success"> </div>
+                                     </div>
+                                     @endif
                                     @if(session('message'))
                                        <div class="bg-green-500 text-white p-4 mb-4">
                                           {{ session('message') }}
                                        </div>
                                     @endif
-                                   <div class="row justify-content-center">                                    
-                                      <div class="col-3"> <img src="https://cdn.dribbble.com/users/1751799/screenshots/5512482/check02.gif" class="fit-image" alt="img-success"> </div>
-                                   </div>
+                                  
                                    <div class="m-auto" style="width: 900px;">
                                        <div class="form-group col-sm-12 " style="font-size: 18px;">
                                           <label class="d-block">Kitob saytda ko'rsatish uchun tayyormi?:</label>

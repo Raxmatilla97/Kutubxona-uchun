@@ -5,7 +5,7 @@
              <h4 class="card-title mb-0">O'xshash resurslar</h4>
           </div>
           <div class="iq-card-header-toolbar d-flex align-items-center">
-             <a href="{{ route('dashboard.resurs-list') }}" class="btn btn-sm btn-primary view-more">Barchasini ko'rish</a>
+             <a href="{{ route('library.resurs-list') }}" class="btn btn-sm btn-primary view-more">Barchasini ko'rish</a>
           </div>
        </div>
        <div class="iq-card-body single-similar-contens">
@@ -17,7 +17,7 @@
                       <div class="position-relative image-overlap-shadow">
                          <a href="javascript:void();"><img class="img-fluid rounded w-100" src="{{$item->image}}" alt=""></a>
                          <div class="view-book">
-                            <a href="{{ route('dashboard.library-book-detal', $item->slug )}}" class="btn btn-sm btn-white">Resursni ko'rish</a>
+                            <a href="{{ route('library.library-book-detal', $item->slug )}}" class="btn btn-sm btn-white">Resursni ko'rish</a>
                          </div>
                       </div>
                    </div>

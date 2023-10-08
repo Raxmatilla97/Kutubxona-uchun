@@ -45,64 +45,120 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {      
-       // Validatsiya qo'llanishlarini yaratish
-        $rules = [
-            'title' => 'required|string|min:10|max:255',          
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1048',          
-            'book_inventar_number' => 'nullable|string',            
-            'nashriyot_nomi' => 'nullable|string',
-            'chiqarilgan_yili' => 'nullable|string',
-            'isbn_issn' => 'nullable|string',
-            'sahifa_soni_va_olcham' => 'nullable|string',
-            'nechanchi_nashr' => 'nullable|string',
-            'kitobga_javobgar_id' => 'required|exists:users,id',
-            'tags' => 'required',
-            'classificatsiya' => 'nullable|string',
-            'status' => 'nullable|boolean',
-            'notes' => 'nullable|string',
-            'tafsiya_etiladi' => 'nullable|boolean',
-            'book_category_id' => 'required|exists:book_categories,id',
-        ];
+    //    // Image validation rules and messages
+    //     $image_rules = [];
+    //     $image_messages = [];
+
+    //     if ($request->hasFile('image')) {
+    //         $image_rules = ['image' => 'nullable|image|mimes:jpeg,png,jpg|max:1048'];
+    //         $image_messages = [ 
+    //             'image.image' => "Faqat rasm fayllarini yuklashingiz mumkin.",
+    //             'image.mimes' => "Faqat JPEG, PNG yoki JPG formatidagi rasmlarni yuklashingiz mumkin.",
+    //             'image.max' => "Rasm fayli 1048 KB dan kichik yoki teng bo'lishi kerak."
+    //         ];
+    //     } else {
+    //         $request->merge(['image' => 'images/book-test.webp']);                         
+    //     }
+
+      
+    //    // Validatsiya qo'llanishlarini yaratish
+    //     $rules = array_merge($image_rules, [
+    //         'title' => 'required|string|min:10|max:255', 
+    //         'book_inventar_number' => 'nullable|string',            
+    //         'nashriyot_nomi' => 'nullable|string',
+    //         'chiqarilgan_yili' => 'nullable|string',
+    //         'isbn_issn' => 'nullable|string',
+    //         'sahifa_soni_va_olcham' => 'nullable|string',
+    //         'nechanchi_nashr' => 'nullable|string',
+    //         'kitobga_javobgar_id' => 'required|exists:users,id',
+    //         'tags' => 'required',
+    //         'classificatsiya' => 'nullable|string',
+    //         'status' => 'nullable|boolean',
+    //         'notes' => 'nullable|string',
+    //         'tafsiya_etiladi' => 'nullable|boolean',
+    //         'book_category_id' => 'required|exists:book_categories,id',
+    //     ]);
 
 
-        // Xatolar uchun xabarlar
-        $messages = [
-            'title.required' => "Sarlavha maydoni to'ldirilishi kerak.",
-            'title.string' => "Sarlavha maydoni matn bo'lishi kerak.",
-            'title.min' => "Sarlavha maydonida kamida :min belgi bo'lishi kerak.",
-            'title.max' => 'Sarlavha maydonida :max belgidan oshmasligi kerak.',
-            'tags.required' => "Kalit so'zlar maydoni to'ldirilishi kerak.",          
-            'book_category_id.required' => "Resurs bo'limi tanlanishi kerak.",         
-            'kitobga_javobgar_id.required' => "Kitobga javobgar kutubxonachi tanlanishi kerak.",         
-        ];
+    //     // Xatolar uchun xabarlar
+    //     $messages = array_merge($image_messages, [
+    //         'title.required' => "Sarlavha maydoni to'ldirilishi kerak.",
+    //         'title.string' => "Sarlavha maydoni matn bo'lishi kerak.",
+    //         'title.min' => "Sarlavha maydonida kamida :min belgi bo'lishi kerak.",
+    //         'title.max' => 'Sarlavha maydonida :max belgidan oshmasligi kerak.',
+    //         'tags.required' => "Kalit so'zlar maydoni to'ldirilishi kerak.",          
+    //         'book_category_id.required' => "Resurs bo'limi tanlanishi kerak.",         
+    //         'kitobga_javobgar_id.required' => "Kitobga javobgar kutubxonachi tanlanishi kerak.",          
+                   
+    //     ]);
+
+
+            $rules = [
+                'title' => 'required|string|min:10|max:255', 
+                'book_inventar_number' => 'nullable|string',    
+                'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1048',    
+                'nashriyot_nomi' => 'nullable|string',
+                'chiqarilgan_yili' => 'nullable|string',
+                'isbn_issn' => 'nullable|string',
+                'sahifa_soni_va_olcham' => 'nullable|string',
+                'nechanchi_nashr' => 'nullable|string',
+                'kitobga_javobgar_id' => 'required|exists:users,id',
+                'tags' => 'required',
+                'classificatsiya' => 'nullable|string',
+                'status' => 'nullable|boolean',
+                'notes' => 'nullable|string',
+                'tafsiya_etiladi' => 'nullable|boolean',
+                'book_category_id' => 'required|exists:book_categories,id',
+            ];
+    
+    
+            // Xatolar uchun xabarlar
+            $messages = [
+                'title.required' => "Sarlavha maydoni to'ldirilishi kerak.",
+                'title.string' => "Sarlavha maydoni matn bo'lishi kerak.",
+                'title.min' => "Sarlavha maydonida kamida :min belgi bo'lishi kerak.",
+                'title.max' => 'Sarlavha maydonida :max belgidan oshmasligi kerak.',
+                'tags.required' => "Kalit so'zlar maydoni to'ldirilishi kerak.",          
+                'book_category_id.required' => "Resurs bo'limi tanlanishi kerak.",         
+                'kitobga_javobgar_id.required' => "Kitobga javobgar kutubxonachi tanlanishi kerak.",    
+                
+                'image.image' => "Faqat rasm fayllarini yuklashingiz mumkin.",
+                'image.mimes' => "Faqat JPEG, PNG yoki JPG formatidagi rasmlarni yuklashingiz mumkin.",
+                'image.max' => "Rasm fayli 1048 KB dan kichik yoki teng bo'lishi kerak."
+                       
+            ];
 
         // Validatsiya qo'llanishlarini tekshirish
         $validator = Validator::make($request->all(), $rules, $messages);
 
-        // // Xatolar bo'lsa
-        // if ($validator->fails()) {
-        //     return response()->json(['errors' => $validator->errors()], 400);
-        // }
+        // Xatolar bo'lsa
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        // Image yuklash  
+        // Image upload  
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename_image = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('images', $filename_image, 'public');
-            $rules['image'] = $filePath;
+            $request->merge(['image' => $filePath]);
+        }else{
+            $request->merge(['image' => 'not_deletes/book-test.webp']);
         }
+
+ 
 
         $joylagan_auth = Auth::user()->id;
         $slug = Str::slug($rules['title'], '_') . '_' . now()->format('YmdHis');
-        $tags = explode(",", $request->input('tags'));
+        $tags = explode(",", $request->input('tags'));        
         $tmp_file = TemporaryFile::where('folder', $request->pdf)->first();
 
         // Yangi ma'lumotlarni saqlash
         $newData = [
             'title' => $request->input('title'),
             'slug' => $slug,
-            'image' => $rules['image'] ?? null,
-            'pdf' => $tmp_file->folder . '/' . $tmp_file->filename . $tmp_file->file ?? null,
+            'image' => $request->input('image'),
+            'pdf' => isset($tmp_file) ? $tmp_file->folder . '/' . $tmp_file->filename . $tmp_file->file ?? null : null,
             'book_inventar_number' => $request->input('book_inventar_number'),
             'book_or_article' => 'book',
             'nashriyot_nomi' => $request->input('nashriyot_nomi'),
@@ -125,7 +181,7 @@ class BooksController extends Controller
         $book = Book::create($newData);
         $book->tag($tags);
 
-        return response()->json(['message' => 'Ma\'lumotlar muvaffaqiyatli saqlandi'], 200);
+        return redirect()->to(route('dashboard.arm-resurslari.edit', $book->slug) . '#cpnfirm-data')->with('success', "Siz yaratgan kitob muvaffaqiyatli kutubxonaga joylandi!");
     }
 
     /**

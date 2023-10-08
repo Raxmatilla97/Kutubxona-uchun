@@ -7,7 +7,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>CSPU - TEST</title>
       
-      @if (Route::currentRouteNamed('dashboard.library-book-detal'))
+      @if (Route::currentRouteNamed('library.library-book-detal'))
         
       @else
          @vite(['resources/css/app.css', 'resources/js/app.js'])

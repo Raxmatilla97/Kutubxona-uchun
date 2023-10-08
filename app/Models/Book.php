@@ -12,7 +12,31 @@ class Book extends Model
 {
     use HasFactory;
     use Rateable;
+
     use \Conner\Tagging\Taggable;
+
+    protected $fillable = [
+        'title',
+        'slug',
+        'book_or_article',
+        'image',
+        'book_inventar_number',
+        'nashriyot_nomi',
+        'chiqarilgan_yili',
+        'isbn_issn',
+        'sahifa_soni_va_olcham',
+        'nechanchi_nashr',
+        'kitobga_javobgar_id',
+        'classificatsiya',
+        'status',
+        'notes',
+        'tafsiya_etiladi',
+        'book_category_id',
+        'pdf',
+        'tags',
+        'joylagan_auth',       
+        // Boshqa maydonlar
+    ];
   
     public function BookCategory(){
         return $this->belongsTo(BookCategory::class);

@@ -106,7 +106,7 @@
                                     <td>
                                        <div class="flex align-items-center list-user-action">
                                           <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Nusxa qo'shish" href="#"><i class="ri-user-add-line"></i></a>
-                                          <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tahrirlash" href="#"><i class="ri-pencil-line"></i></a>
+                                          <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tahrirlash" href="{{ route('arm-resurslari.edit', $book->slug ) }}"><i class="ri-pencil-line"></i></a>
                                           <form action="{{ route('arm-resurslari.destroy', $book->id ) }}" method="POST">
                                             @csrf
                                             @method('DELETE')

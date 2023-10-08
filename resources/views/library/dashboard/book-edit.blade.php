@@ -7,7 +7,7 @@
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">Bosh sahifa</li>
                     <li class="breadcrumb-item" aria-current="page">ARM boshqaruvi</li>    
-                    <li class="breadcrumb-item active" aria-current="page">Kitob yaratish</li>                
+                    <li class="breadcrumb-item active" aria-current="page">Kitobni tahrirlash</li>                
                 </ul>
             </nav>
         </div>   
@@ -174,7 +174,7 @@
                  <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between">
                        <div class="iq-header-title">
-                          <h4 class="card-title">Kitob ma'lumotlarini yaratish sahifasi</h4>
+                          <h4 class="card-title">Kitob ma'lumotlarini tahrirlash sahifasi: <b class="text-blue-600">{{$book->title}}</b></h4>
                        </div>
                     </div>
                     <div class="iq-card-body">
@@ -202,14 +202,20 @@
                              </div>
                           </div>
                        </div>
-                       <form class="form" action="{{ route('arm-resurslari.store')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                       <form class="form" action="{{ route('arm-resurslari.update', $book->id )}}" method="POST" autocomplete="off" enctype="multipart/form-data">
                         @csrf 
                         @method('post')   
                           <div class="row setup-content" id="user-detail" style="display: flex;">
                              <div class="col-sm-12">
                                 <div class="col-md-12 p-0">
                                    <h3 class="mb-4">Asosiy ma'lumotlar:</h3>
+                                   {{-- @foreach ($book->tags as $index => $tag)
+                                   {{ $tag->name }}
+                                   @if ($index < count($book->tags) - 1),
+                                   @endif
+                               @endforeach --}}
 
+                               
                                     <div class="w-50 m-auto">
                                        <div class="alert alert-primary mb-4" role="alert">
                                           <div class="iq-alert-icon">
@@ -230,40 +236,40 @@
                                    <div class="row">
                                       <div class="form-group col-md-6">
                                          <label for="title" class="control-label">Kitobning nomini yozing: <b class="text-red-600">*</b></label>
-                                         <input maxlength="100" type="text" id="title" name="title" required="required" class="form-control" placeholder="O'tgan kunlar...">
+                                         <input maxlength="100" type="text" id="title" name="title" value="{{old('title', $book->title)}}" required="required" class="form-control" placeholder="O'tgan kunlar...">
                                       </div>
                                       <div class="form-group col-md-6">
                                          <label for="book_inventar_number"  class="control-label">Kitob inventar raqami: <b class="text-red-600">*</b></label>
-                                         <input maxlength="100" type="text" id="book_inventar_number" required="required" name="book_inventar_number" class="form-control" placeholder="12345">
+                                         <input maxlength="100" type="text" id="book_inventar_number"  value="{{old('book_inventar_number', $book->book_inventar_number)}}" required="required" name="book_inventar_number" class="form-control" placeholder="12345">
                                       </div>
                                      
                                       <div class="col-md-6 form-group">
                                          <label for="nashriyot_nomi" class="control-label">Nashriyot nomi: <b class="text-red-600">*</b></label>
-                                         <input type="text" class="form-control" id="nashriyot_nomi" required="required" name="nashriyot_nomi"  value="{{ old('nashriyot_nomi')}}" placeholder="Sharq nashiryoti">
+                                         <input type="text" class="form-control" id="nashriyot_nomi" required="required" name="nashriyot_nomi"  value="{{ old('nashriyot_nomi', $book->nashriyot_nomi)}}" placeholder="Sharq nashiryoti">
                                       </div>
                                       <div class="col-md-6 form-group">
                                          <label for="chiqarilgan_yili" class="control-label">Chiqarilgan yili: <b class="text-red-600">*</b></label>
-                                         <input type="text" id="chiqarilgan_yili" class="form-control" required="required" name="chiqarilgan_yili" value="{{ old('chiqarilgan_yili')}}" placeholder="2023">
+                                         <input type="text" id="chiqarilgan_yili" class="form-control" required="required" name="chiqarilgan_yili" value="{{ old('chiqarilgan_yili', $book->chiqarilgan_yili)}}" placeholder="2023">
                                       </div>                                     
                                       <div class="col-md-6 form-group">
                                          <label for="isbn_issn" class="control-label">ISBN yoki ISSN: <b class="text-red-600">*</b></label>
-                                         <input type="text" class="form-control" required="required" id="isbn_issn" name="isbn_issn" value="{{ old('isbn_issn')}}" placeholder="ISBN-123456">
+                                         <input type="text" class="form-control" required="required" id="isbn_issn" name="isbn_issn" value="{{ old('isbn_issn', $book->isbn_issn)}}" placeholder="ISBN-123456">
                                       </div>
                                       <div class="col-md-6 form-group">
                                         <label for="sahifa_soni_va_olcham" class="control-label">Sahifa soni va o'lchami: <b class="text-red-600">*</b></label>
-                                        <input type="text" class="form-control" required="required" id="sahifa_soni_va_olcham" name="sahifa_soni_va_olcham" value="{{old('sahifa_soni_va_olcham')}}" placeholder="200 varoq 30x20">
+                                        <input type="text" class="form-control" required="required" id="sahifa_soni_va_olcham" name="sahifa_soni_va_olcham" value="{{old('sahifa_soni_va_olcham', $book->sahifa_soni_va_olcham)}}" placeholder="200 varoq 30x20">
                                      </div>
                                      <div class="col-md-6 form-group">
                                         <label for="nechanchi_nashr" class="control-label">Nechanchi nashrligi: <b class="text-red-600">*</b></label>
-                                        <input type="text" class="form-control" required="required" id="nechanchi_nashr" name="nechanchi_nashr" value="{{ old('nechanchi_nashr')}}" placeholder="1-chi nashr">
+                                        <input type="text" class="form-control" required="required" id="nechanchi_nashr" name="nechanchi_nashr" value="{{ old('nechanchi_nashr', $book->nechanchi_nashr)}}" placeholder="1-chi nashr">
                                      </div>
                                      <div class="col-md-6 form-group">
                                         <label for="classificatsiya" class="control-label">Resurs klasifikatsiyasi: <b class="text-red-600">*</b></label>
-                                        <input type="text" class="form-control" required="required" id="classificatsiya" name="classificatsiya" value="{{ old('classificatsiya')}}" placeholder="323(575.1)">
+                                        <input type="text" class="form-control" required="required" id="classificatsiya" name="classificatsiya" value="{{ old('classificatsiya', $book->classificatsiya)}}" placeholder="323(575.1)">
                                      </div>                                    
                                       <div class="col-md-12 mb-3 form-group">
                                          <label for="address" class="control-label">Resurs haqida qisqacha ma'lumotlar bo'lsa: </label>
-                                         <textarea name="notes" class="form-control" id="address" rows="5">{{old('notes')}}</textarea>
+                                         <textarea name="notes" class="form-control" id="address" rows="5">{{old('notes', $book->notes)}}</textarea>
                                       </div>
                                      
                                    </div>
@@ -282,7 +288,7 @@
                                         <select class="form-control" name="kitobga_javobgar_id" id="users" required>
                                            <option selected="">Tanlang</option>
                                            @foreach($users as $user)
-                                            <option value="{{$user->id}}" {{ old('kitobga_javobgar_id') === $user->id ? 'selected' : '' }}>{{$user->name}}</option>
+                                            <option value="{{$user->id}}" {{ old('kitobga_javobgar_id', $book->kitobga_javobgar_id ) === $user->id ? 'selected' : '' }}>{{$user->name}}</option>
                                            @endforeach 
                                         </select>
                                      </div>
@@ -292,14 +298,15 @@
                                         <select class="form-control" name="book_category_id" id="category" required>
                                            <option selected="">Tanlang</option>
                                            @foreach($categores as $category)
-                                            <option value="{{$category->id}}" {{ old('book_category_id') === $category->id ? 'selected' : '' }}>{{$category->title}}</option>
+                                            <option value="{{$category->id}}" {{ old('book_category_id', $book->book_category_id) === $category->id ? 'selected' : '' }}>{{$category->title}}</option>
                                            @endforeach 
                                         </select>
                                      </div>                                
                                         <div class="col-md-12 form-group">
                                          <div class="form-group">
                                             <label for="tags" class="control-label">Resurs mazmunidan kelib chiqib unga mos kalit so‘zlarni tanlang: <b class="text-red-600">*</b></label>
-                                            <input type="tags" class="w-full px-4 py-6 text-md border border-gray-300 rounded outline-none" value="{{old('tags')}}" required="required" id="tags" name="tags" >
+                                           
+                                            <input type="tags" value='{{ old('tags',implode(', ', array_map('strtolower', $book->tagNames()))) }}'  class="w-full px-4 py-6 text-md border border-gray-300 rounded outline-none" required="required" id="tags" name="tags" >
                                          </div>
                                       </div>
                                       <div class="col-md-12 form-group">
@@ -363,7 +370,7 @@
                                    
                                    <div id="image-preview" class="col-md-6 flex justify-center">
                                        <!-- Standart image ko'rinadi -->
-                                       <img src="http://127.0.0.1:8000/assets/images/book-test.webp" id="preview-image"/>
+                                       <img src="{{'/storage/'}}{{$book->image}}" id="preview-image"/>
                                    </div>
                                    
                                    <script>
@@ -407,9 +414,9 @@
                                  
                                        <div class="col-md-12 mt-8">
                                           <div class="flex items-center justify-center max-w-full mb-7">
-                                             <div class="relative text-center hidden md:block">
+                                             <div class="relative text-center hidden md:block" style="width: 400px;">
                                                <h4 class="shadow-sm relative rounded-md text-md border  border-gray-200   rounded-t-lg  font-medium px-1 py-3 right-2 ">
-                                                Elektron resursni yuklang!
+                                                Elektron resursni yangilash!
                                                </h4>           
                                                
                                              </div>
@@ -422,7 +429,16 @@
                                    
                                                <input type="file" class="text-md" value="{{ old('pdf')}}" required="required" name="pdf"  data-max-file-size="5MB" />
                                                 
-                                             </label>           
+                                             </label> 
+                                             <div class="relative text-center hidden ml-4 mr-4 md:block" style="width: 400px;">
+                                                <h4 class="shadow-sm relative rounded-md text-md border border-gray-200 rounded-t-lg font-medium px-1 py-3 right-2 ">Faylni yuklab olish
+                                                 
+                                                        <a target="_blank" href="{{'/storage/uploads/'}}{{$book->pdf}}"><img id="myImg" src="{{ asset('assets/images/download.png')}}" alt=""></a>
+                                                  
+                                                </h4>        
+                                            </div>
+                                        
+                                                     
                                          </div>  
                                        </div>
                                   

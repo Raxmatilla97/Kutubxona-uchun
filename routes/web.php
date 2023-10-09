@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/book/{slug}', [LibraryController::class, 'libraryBookDetal'])->name('library.library-book-detal');
         Route::get('/authors', [LibraryController::class, 'libraryAuthors'])->name('library.library-authors');
         Route::post('/author', [AuthorController::class, 'store'])->name('library.library-author-store');
-        Route::get('/author-books/{slug}', [LibraryController::class, 'libraryAuthorBooks'])->name('library..library-author-books');
+        Route::get('/author-books/{slug}', [LibraryController::class, 'libraryAuthorBooks'])->name('library.library-author-books');
 
 
         Route::resource('arm-resurslari', BooksController::class)->names([

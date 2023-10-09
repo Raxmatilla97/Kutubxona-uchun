@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
+use App\Models\BookCopy;
 
 class BookStudent extends Model
 {
@@ -13,6 +14,12 @@ class BookStudent extends Model
 
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Student::class, 'student_id');
     }
+
+    public function bookCopy()
+    {
+        return $this->belongsTo(BookCopy::class, 'book_copy_id');
+    }
+
 }

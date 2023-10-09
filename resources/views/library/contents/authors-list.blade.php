@@ -204,8 +204,8 @@
                           
                            <tr @if ($item->status == 0) style="opacity: 20%;" @endif>
                               <td class="text-center">{{ $i++ }}</td>
-                              <td><a href="{{ route('dashboard.library-author-books', $item->slug )}}" style="font-size: 20px;">
-                                 <img style="display: inline-block!important; border-radius: 50%;" class="img-fluid avatar-60 mr-3 d-sm-none" src="{{ $item->img }}" alt="{{ $item->fish }}">
+                              <td><a href="{{ route('library.library-author-books', $item->slug )}}" style="font-size: 20px;">
+                                 <img style="display: inline-block!important; border-radius: 50%;" class="img-fluid avatar-60 mr-3 d-sm-none" src="{{ asset('assets/images/3432396.png') }}" alt="{{ $item->fish }}">
                                     {{ $item->fish }}
                                  </a>
                               </td>

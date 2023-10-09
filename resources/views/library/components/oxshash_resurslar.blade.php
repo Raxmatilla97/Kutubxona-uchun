@@ -15,7 +15,7 @@
                 <div class="row align-items-center">
                    <div class="col-5">
                       <div class="position-relative image-overlap-shadow">
-                         <a href="javascript:void();"><img class="img-fluid rounded w-100" src="{{$item->image}}" alt=""></a>
+                         <a href="javascript:void();"><img class="img-fluid rounded w-100" src="{{'/storage'}}/{{$item->image}}" alt=""></a>
                          <div class="view-book">
                             <a href="{{ route('library.library-book-detal', $item->slug )}}" class="btn btn-sm btn-white">Resursni ko'rish</a>
                          </div>

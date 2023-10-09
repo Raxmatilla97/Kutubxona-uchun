@@ -31,32 +31,32 @@
                                          <ul id="description-slider-nav" class="list-inline p-0 m-0  d-flex align-items-center">
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid rounded w-100" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid rounded w-100" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid rounded w-100" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid rounded w-100" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid rounded w-100" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid rounded w-100" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid rounded w-100" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid rounded w-100" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid rounded w-100" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid rounded w-100" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid rounded w-100" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid rounded w-100" alt="">
                                                </a>
                                             </li>
                                          </ul>
@@ -65,32 +65,32 @@
                                          <ul id="description-slider" class="list-inline p-0 m-0  d-flex align-items-center">
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
                                                </a>
                                             </li>
                                             <li>
                                                <a href="javascript:void(0);">
-                                               <img src="{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
+                                               <img src="{{'/storage'}}/{{ $book->image }}" class="img-fluid w-100 rounded" alt="">
                                                </a>
                                             </li>
                                          </ul>
@@ -139,11 +139,11 @@
                                         <th scope="row">MUALLIF(LAR):</th>
                                         <td class="text-primary">
                                           @if (count($book->authors) == 1 && $book->authors[0]->status == '1')
-                                          <a href="{{route('dashboard.library-author-books', $book->authors[0]->slug)}}">{{$book->authors[0]->fish}}</a>
+                                          <a href="{{route('library.library-author-books', $book->authors[0]->slug)}}">{{$book->authors[0]->fish}}</a>
                                           @else
                                                 @foreach ($book->authors as $index=>$author)
                                                    @if ($author->status == '1')
-                                                      <a href="{{ route('dashboard.library-author-books', $author->slug)}}">{{ $author->fish }}</a>@if ($index+1 != count($book->authors)), @endif
+                                                      <a href="{{ route('library.library-author-books', $author->slug)}}">{{ $author->fish }}</a>@if ($index+1 != count($book->authors)), @endif
                                                    @endif
                                                 @endforeach
                                           @endif

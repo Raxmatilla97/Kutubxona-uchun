@@ -120,7 +120,7 @@
                                     <div class="iq-card-body p-0">
                                         <div class="d-flex align-items-center">
                                             <div class="col-6 p-0 position-relative image-overlap-shadow">                                             
-                                                <a href="{{ route('library.library-book-detal', $item->slug ?? null )}}"><img class="img-fluid rounded w-100" src="{{ $item->image }}" alt=""></a>
+                                                <a href="{{ route('library.library-book-detal', $item->slug ?? null )}}"><img class="img-fluid rounded w-100" src="{{'/storage'}}/{{ $item->image }}" alt=""></a>
                                                 <div class="view-book">
                                                 <a href="{{ route('library.library-book-detal', $item->slug ?? null)}}" class="btn btn-sm btn-white">
                                                     @if ($item->book_or_article == 'book')

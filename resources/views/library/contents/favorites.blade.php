@@ -15,7 +15,18 @@
                <div class="d-flex align-items-center">
                   <div class="col-5 p-0 position-relative">
                      <a href="javascript:void();">
-                        <img src="{{ $item->image }}" class="img-fluid rounded w-100" alt="">
+                        <img 
+                        @if ($item->image)
+                            src="{{'/storage'}}/{{$item->image}}"
+                        @else
+                           @if ($item->book_or_article == 'book')
+                              src="{{ asset('assets/images/book-test.webp')}}"
+                           @else
+                              src="{{ asset('assets/images/book-test3.webp')}}"
+                           @endif
+                        @endif
+                         
+                        class="img-fluid rounded w-100" alt="">
                      </a>                                
                   </div>
                   <div class="col-7">

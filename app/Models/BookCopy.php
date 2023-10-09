@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Book;
 use App\Models\Student;
+use App\Models\BookStudent;
 
 class BookCopy extends Model
 {
@@ -21,7 +22,12 @@ class BookCopy extends Model
 
     public function book()
     {
-        return $this->belongsTo(Book::class);
+        return $this->belongsTo(Book::class, 'book_id');
+    }
+
+    public function bookStudents()
+    {
+        return $this->hasMany(BookStudent::class, 'book_copy_id');
     }
    
 }

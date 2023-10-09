@@ -35,7 +35,7 @@
                       </div>
                     </div>
                     @endif   
-                                   --}}
+                                   
                  
                      <div class="iq-card-body">
                         <div class="table-responsive">
@@ -76,7 +76,25 @@
                                     
                                     </td>   
                                     <td>{{ $copy->inventor_number }}</td>
-                                    <td>{{ $copy->isset_book }}</td>  
+
+                                    <td>                                      
+                                       <div class="flex justify-center">
+                                          @if($copy->isset_book == '1')
+                                              <span class="badge iq-bg-success">Kitob kutubxonada!</span>
+                                          @else
+                                              <span class="badge iq-bg-primary"> 
+                                                  @if($copy->bookStudents->count() > 0)
+                                                      @foreach($copy->bookStudents as $bookStudent)
+                                                      <img src="{{'/assets/images/1434240.png'}}" style="width: 50px; margin: auto;" class="mb-2">  {{$bookStudent->student->fish}}
+                                                      @endforeach
+                                                  @else
+                                                      Noaniq!
+                                                  @endif
+                                              </span>
+                                          @endif
+                                      </div>
+                                      
+                                    </td>  
                                                          
                                     <td>
                                        <div class="flex align-items-center list-user-action">

@@ -65,6 +65,7 @@ Route::middleware('auth')->group(function () {
             'update' => 'dashboard.kitob-nusxalari.update',
             'destroy' => 'dashboard.kitob-nusxalari.destroy',
         ]);
+      
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

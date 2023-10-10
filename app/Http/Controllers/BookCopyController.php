@@ -62,8 +62,14 @@ class BookCopyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BookCopy $bookCopy)
+    public function destroy(Request $request)
     {
-        //
+        $book_copy = BookCopy::find($request->book_copy_id);
+        if($book_copy) {
+            $book_copy->delete();
+            return redirect()->route('dashboard.kitob-nusxalari.index')->with('success', "Kitob nusxasi muffaqiyatli o'chirildi!");
+        } else {
+            return redirect()->route('dashboard.kitob-nusxalari.index')->with('error', 'Kitob nusxasi topilmadi!');
+        } 
     }
 }

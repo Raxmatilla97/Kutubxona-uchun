@@ -100,10 +100,10 @@
                                        <div class="flex align-items-center list-user-action">
                                           <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Nusxa qo'shish" href="#"><i class="ri-user-add-line"></i></a>
                                           <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tahrirlash" href="#"><i class="ri-pencil-line"></i></a>
-                                          <form action="#" method="POST">
+                                          <form action="{{route('dashboard.kitob-nusxalari.destroy', $copy->id)}}" method="POST">
                                             @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="book_id" value="{{$copy->id}}">
+                                            @method('DELETE')  
+                                            <input type="hidden" name="book_copy_id" value="{{$copy->id}}">                                        
                                             <a class="iq-bg-primary mt-3" data-toggle="tooltip" data-placement="top" title="" data-original-title="O'chirish" href="#" onclick="event.preventDefault();this.closest('form').submit();"><i class="ri-delete-bin-line"></i></a>
                                         </form>
                                         

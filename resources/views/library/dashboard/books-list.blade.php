@@ -104,10 +104,10 @@
                                     <td>{{ $book->isbn_issn }}</td>                                                              
                                     <td>{{ $book->chiqarilgan_yili }}</td>
                                   
-                                                         
+                                            
                                     <td>
                                        <div class="flex align-items-center list-user-action">
-                                          <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Nusxa qo'shish" href="#"><i class="ri-user-add-line"></i></a>
+                                          <a class="iq-bg-primary"  data-toggle="modal" data-target="#exampleModalCenteredScrollable" data-placement="top" title="" data-original-title="Nusxa qo'shish" href="#"><i class="ri-user-add-line"></i></a>
                                           <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tahrirlash" href="{{ route('dashboard.arm-resurslari.edit', $book->slug ) }}"><i class="ri-pencil-line"></i></a>
                                           <form action="{{ route('dashboard.arm-resurslari.destroy', $book->id ) }}" method="POST">
                                             @csrf
@@ -119,6 +119,9 @@
                                        </div>
                                     </td>
                                  </tr> 
+
+                                 @include('library.components.create_book_copy')
+                                 
                                 @endforeach                        
                              </tbody>
                            </table>
@@ -136,4 +139,7 @@
          </div>
       </div>
    </div>
+
+ 
+
  @endsection

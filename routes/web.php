@@ -64,7 +64,9 @@ Route::middleware('auth')->group(function () {
             'edit' => 'dashboard.kitob-nusxalari.edit',
             'update' => 'dashboard.kitob-nusxalari.update',
             'destroy' => 'dashboard.kitob-nusxalari.destroy',
+            'addCopy' => 'dashboard.kitob-nusxalari.addCopy'
         ]);
+        Route::get('kitob-nusxalari/add-book/{id}', [BookCopyController::class, 'addCopy'])->name('dashboard.kitob-nusxalari.addCopy');
       
     });
 

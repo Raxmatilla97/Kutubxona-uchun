@@ -209,7 +209,7 @@
                                 </a>
                              </div>
                              <div id="book_copy" class="wizard-step">
-                                 <a href="#book_copy-detail" class="btn btn-default  active">
+                                 <a href="#book_copy_detal" class="btn btn-default  active">
                                  <i class="ri-bookmark-fill text-warning"></i><span>Kitob nusxalari</span>
                                  </a>
                               </div>
@@ -561,6 +561,8 @@
                                         </div>
                                      </div>
 
+                                 
+
                                      <div class="w-50 m-auto">
                                         @if(session('message'))                                      
                                         <div class="alert bg-success text-white" role="alert">
@@ -617,89 +619,64 @@
                         </form>
 
                         {{--  --}}
-                        <div class="row setup-content" id="book_copy-detail" style="display: flex;">
+                     
+                        <div class="row setup-content" id="book_copy_detal" style="display: none;">
                            <div class="col-sm-12">
                               <div class="col-md-12 p-0">
-                                 <h3 class="mb-4">Bank Detail:</h3>
-                                 @if (session('copySuccess'))      
-                                 <div class="alert text-white m-auto" role="alert" style="width: 700px; background-color: #0dd6b8;">
-                                    <div class="iq-alert-icon">
-                                        <i class="ri-alert-line"></i>
-                                    </div>
-                                    <div class="iq-alert-text"><p class="text-md" style="margin-bottom: 0.5rem; font-size: 22px;">{{ session('copySuccess') }}</p>
-                                           
-                                    </div>                                                               
-                                </div>
-                                 <div class="row justify-content-center">                                    
-                                    <div class="col-4"> <img src="{{ asset('assets/images/successfuly.gif')}}" class="fit-image" alt="img-success"> </div>
+                                 <h3 class="mb-4">Kitob nusxalarini yaratish:</h3>
+                                 <div class="flex justify-end mb-4">
+                                    <a href="{{ route('dashboard.kitob-nusxalari.addCopy', $book->id)}}"><button type="button" class="btn-lg mb-3 btn-primary rounded-pill"><i class="ri-bill-fill"></i>Kitob nusxasini yaratish</button></a>
                                  </div>
-                                 @endif
+                                 
                                  <div class="row">
-                                    <div class="col-md-6 form-group ">
-                                       <div class="modal-body border ">     
-                                          <form action="{{ route('dashboard.kitob-nusxalari.store')}}" method="POST" enctype="multipart/form-data">
-                                             @csrf
-                                             @method('POST')                         
-                                             <div class="form-group">
-                                                <label for="book_id">Qaysi kitobga nusxa sifatida belgilanganligi:</label>
-                                                <input type="text" class="form-control" id="book_id" disabled value="{{ $book->title}}">
-                                                <input type="hidden" name="book_id" value="{{ $book->id}}">
-                                             
-                                          </div>                                  
-                                    
-                                             <div class="form-group">
-                                                <label for="inventor_number">Inventar raqamini yozing:</label>
-                                                <input type="text" required class="form-control" id="inventor_number" name="inventor_number" placeholder="INV-123456" value="{{ old('inventor_number') }}">
-                                                @error('inventor_number')
-                                                <small class="error-text form-text">{{ $message }}</small>
-                                                @enderror
-                                             </div>              
-                                             
-                                             <div class="form-group">
-                                                <div class="form-check">
-                                                   <input type="checkbox" class="form-check-input" id="isset_book"  value="1" checked  name="isset_book" {{ old('isset_book') ? 'checked' : '' }}>
-                                                   <label class="form-check-label" for="isset_book">Kitob kutubxonada bormi?</label>
-                                                   @error('isset_book')
-                                                   <small class="error-text form-text">{{ $message }}</small>
-                                                   @enderror
-                                                </div>
-                                             </div>
-                                             <div class="form-group ">
-                                                <label for="status">Resurs bo'limini tanlang: <b class="text-red-600">*</b></label>
-                                                <select class="form-control" name="status" id="status" required>                                                                                                    
-                                                   <option value="aktive" {{ old('status') === 'aktive' ? 'selected' : '' }}>Aktiv resurs</option>
-                                                   <option value="korinmas" {{ old('status') === 'korinmas' ? 'selected' : '' }}>Ko'rinmas resurs</option>
-                                                
-                                                </select>
-                                             </div>                                   
-                                          
-                                          
-                                             <div class="modal-footer">
-                                             
-                                                <button type="submit" class="btn btn-primary">Yaratish</button>
-                                             </div>
-                                          </form>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-6 form-group">
+                                  
+                                    <div class="col-md-12 form-group">
                                        <table id="user-list-table" class="table table-striped table-bordered " role="grid" aria-describedby="user-list-page-info">
                                           <thead>
                                              <tr>
-                                                
-                                                <th>ID</th>
+                                                <th>№</th>
+                                               
                                                 <th>Inventar raqami</th>
                                                 <th>Kitob joylashuvi</th>                                                
                                                 <th>Kitob holati</th>                                                
-                                                <th>Action</th>
+                                                <th>Tahrirlsh</th>
                                              </tr>
                                           </thead>
                                           <tbody>
-                                             <tr>                                               
-                                                <td>Anna Sthesia</td>
-                                                <td>(760) 756 7568</td>
+                                             @php
+                                                 $i = 1;
+                                             @endphp
+                                             @foreach($book_copy as $copy)
+                                             <tr>    
+                                                <td>{{$i++}}</td>                                           
+                                                
+                                                <td>{{$copy->inventor_number}}</td>
                                              
-                                                <td><span class="badge iq-bg-primary">Active</span></td>                                               
-                                                <td><span class="badge iq-bg-primary">Active</span></td>                                               
+                                                <td>
+                                                   <div class="flex justify-center">
+                                                      @if($copy->isset_book == '1')
+                                                          <span class="badge iq-bg-success">Kitob kutubxonada!</span>
+                                                      @else
+                                                          <span class="badge iq-bg-primary"> 
+                                                              @if($copy->bookStudents->count() > 0)
+                                                                  @foreach($copy->bookStudents as $bookStudent)
+                                                                  <img src="{{'/assets/images/1434240.png'}}" style="width: 50px; margin: auto;" class="mb-2">  {{$bookStudent->student->fish}}
+                                                                  @endforeach
+                                                              @else
+                                                                  Noaniq!
+                                                              @endif
+                                                          </span>
+                                                      @endif
+                                                  </div>
+                                                </td>                                               
+                                                <td>
+                                                   @if($copy->status == '1')
+                                                   <span class="badge iq-bg-primary">Aktiv!</span>
+                                                 @else
+                                                <span class="badge iq-bg-danger">Aktiv emas!</span>
+                                                 @endif
+                                                  
+                                                </td>                                               
                                                 <td>
                                                    <div class="flex align-items-center list-user-action">
                                                       <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add" href="#"><i class="ri-user-add-line"></i></a>
@@ -708,14 +685,19 @@
                                                    </div>
                                                 </td>
                                              </tr>
+                                             @endforeach
                                        
                                           </tbody>
                                        </table>
+                                       <div class="mt-4 mb-4">
+                                          {!! $book_copy->appends(Request::except('page'))->render() !!}
+                                       </div>
                                     </div>
                                     
                                  </div>
-                                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Keyingisi</button>
                               </div>
+                              
                            </div>
                         </div>
                         {{--  --}}

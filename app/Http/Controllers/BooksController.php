@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\User;
+use App\Models\BookCopy;
 use App\Models\BookCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -157,14 +158,14 @@ class BooksController extends Controller
         $categores = BookCategory::all();
         // $postTags = implode(', ', $book->tagNames()); 
         $tagsArray = explode(',', $book->tags);
-
+        $book_copy = BookCopy::where('book_id', $book->id)->paginate(15);
         // dd($book->tagNames());
   
         if (!$book) {           
             return abort(404, 'Book not found');
         }
         
-        return view('library.dashboard.book-edit', compact('book', 'users', 'categores'));
+        return view('library.dashboard.book-edit', compact('book', 'users', 'categores', 'book_copy'));
     }
     
     /**

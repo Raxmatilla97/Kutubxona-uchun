@@ -83,7 +83,7 @@ class BookCopyController extends Controller
         $book_copy = BookCopy::create($newData);     
     
         // return redirect()->back()->with('copySuccess', "Siz yaratgan kitob nusxasi muvaffaqiyatli yaratildi!");
-        return redirect()->to(route('dashboard.arm-resurslari.edit', $book->slug) . '#book_copy-detail')->with('copySuccess', "Siz yaratgan kitob nusxasi muvaffaqiyatli yaratildi!");
+        return redirect()->back()->with('copySuccess', "Siz yaratgan kitob nusxasi muvaffaqiyatli yaratildi!");
     }
 
     /**
@@ -122,5 +122,19 @@ class BookCopyController extends Controller
         } else {
             return redirect()->route('dashboard.kitob-nusxalari.index')->with('error', 'Kitob nusxasi topilmadi!');
         } 
+    }
+
+    public function addCopy($request)
+    {
+        $book_id = $request;       
+        // $book_copy = BookCopy::where('book_id', $book_id)->orderBy('created_at', 'desc')->paginate(25);
+        $book = Book::find($book_id);
+        $book_copy = BookCopy::where('book_id', $book->id)->orderBy('created_at', 'desc')->paginate(25);
+        
+        return view('library.components.book_copyes_in_book', compact(
+            'book_id',
+            'book_copy',
+            'book'      
+        ));
     }
 }
